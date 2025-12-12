@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.UI;
@@ -43,6 +44,10 @@ public class CharacterTalkManager : MonoBehaviour
     void OnSpace(InputValue input){
         isTalk = true;
     }
+    public void OnESC(InputValue inputValue)
+    {
+        gameManager.ESC();
+    }
 
     public void SetObject(MakeConversation_Text_Data d, Character_Data c)
     {
@@ -76,8 +81,7 @@ public class CharacterTalkManager : MonoBehaviour
                 Nametext.text = CharacterData.Name;
             }
                 yield return StartCoroutine(conttext.TextActive(Talktext, item.TextData));
-            if (item.s != null)
-            {
+            if (item.s != null) {
                 left.text = item.s.Switch_Data[0].Switched_Title;
                 right.text = item.s.Switch_Data[1].Switched_Title;
                 PushBool = false;
@@ -92,6 +96,10 @@ public class CharacterTalkManager : MonoBehaviour
                 isTalk = false;
                 yield return new WaitUntil(() => isTalk);
                 isTalk = false;
+            }
+            if (item.IsLoad)
+            {
+                SceneManager.LoadScene(item.SceneName);
             }
         }
         yield break;

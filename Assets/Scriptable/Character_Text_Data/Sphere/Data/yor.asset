@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: "\u3042\u306A\u305F\u306F\u8AB0"
+  m_Name: yor
   m_EditorClassIdentifier: Assembly-CSharp::Switch
-  TextData: "\u3042\u306A\u305F\u306F\u8AB0\uFF1F"
+  TextData: "\u8AB0"
   Side: 0
   s: {fileID: 11400000}
   Switch_Data:
-  - Switched_Title: "\u30A2\u30F3\u30D1\u30F3\u30DE\u30F3"
+  - Switched_Title: "\u3070\u3044\u304D\u3093\u307E\u3093"
     Switched_Data:
     - {fileID: 11400000, guid: 808d8482ab2d53341856c6a3bc158ddb, type: 2}
-  - Switched_Title: "\u30C9\u30E9\u3048\u3082\u3093"
+  - Switched_Title: "\u30A2\u30F3\u30D1\u30F3\u30DE\u30F3"
     Switched_Data:
     - {fileID: 11400000, guid: 808d8482ab2d53341856c6a3bc158ddb, type: 2}

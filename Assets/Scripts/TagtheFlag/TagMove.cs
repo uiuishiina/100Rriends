@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,11 +13,12 @@ public class TagMove : MonoBehaviour
     float rote = 5;
     //------  ‹S‘¤‚©“¦‚°‚é‘¤  ------
     public float Speed { private set; get; } = 5;
-    public bool IsDemon { private set; get; } = false;
+    public bool IsDemon { protected set; get; } = false;
 
     //------  player  ------
     private Rigidbody rb;
     private Vector2 inputvec;
+    protected bool IsStop = false;
 
     virtual protected void Awake()
     {
@@ -32,16 +34,22 @@ public class TagMove : MonoBehaviour
     }
     private void OnMove(InputValue inputValue)
     {
+        if(IsStop) { return; }
         inputvec = inputValue.Get<Vector2>();
     }
     private void OnSpace(InputValue inputValue)
     {
-        var o = touch_Script.Get().GetComponent<TagMove>();
+        if(IsStop) { return; }
+        var g = touch_Script.Get();
+        if (g == null) return;
+        var o = g.GetComponent<TagMove>();
         if (o == null) return;
-        o.Touch(this.gameObject);
+        o.Touch(this.gameObject,IsDemon);
+        if(IsDemon) IsDemon = false;
     }
     private void Update()
     {
+        if (IsStop) { return; }
         rb.linearVelocity = new Vector3(inputvec.x * Speed, rb.linearVelocity.y, inputvec.y * Speed);
         if (inputvec.magnitude < 0.1) {
             return;
@@ -51,11 +59,35 @@ public class TagMove : MonoBehaviour
         Body.transform.localRotation = Quaternion.RotateTowards(Body.transform.localRotation, q, rote);
     }
 
-    public void Touch(GameObject Player)
+    public void StartDamon()
     {
-        var s = Player.GetComponent<TagMove>().IsDemon;
-        if (!s)  {
+        IsDemon = true;
+    }
+    public void SendChengeDamon(GameObject D)
+    {
+        Damon = D;
+        Debug.Log("CD"+this.gameObject);
+    }
+    virtual public void Touch(GameObject Player,bool Isd)
+    {
+        if (!Isd)  {
             return;
         }
+        else
+        {
+            gameManager.ChengeDamon(this.gameObject);
+            IsDemon = true;
+            StartCoroutine(Stop());
+        }
+    }
+    virtual protected IEnumerator Stop()
+    {
+        IsStop = true;
+        for (int i = 0; i < 5; i++) {
+            yield return new WaitForSeconds(1);
+        }
+        IsStop = false;
+        Debug.Log("Stopoff");
+        yield return null;
     }
 }

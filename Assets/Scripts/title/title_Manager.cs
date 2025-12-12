@@ -7,7 +7,7 @@ public class title_Manager : MonoBehaviour
 {
     [SerializeField, Header("開始ボタン")] Button StartButton;
 
-
+    [SerializeField] Scene Tag;
     //------  ------
     private void Start()
     {

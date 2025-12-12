@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59062fcf4b348e24aa1c95a2f4c9ca82, type: 3}
   m_Name: "\u919C\u3044\u5316\u3051\u7269"
   m_EditorClassIdentifier: Assembly-CSharp::Setting_Text_Data
-  TextData: "\u919C\u3044\u5316\u3051\u7269"
+  TextData: "\u5909\u306A\u4EBA"
   Side: 0
   s: {fileID: 0}

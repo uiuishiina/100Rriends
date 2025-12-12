@@ -27,7 +27,6 @@ public class PlayerTalkController : MonoBehaviour
     
     public void OnSpace()
     {
-        Debug.Log("aaaaaa");
         if(Frend == null) { return; }
         textdata = Frend.GetComponent<Frends_Data_Script>().GetTextData();
         charaData = Frend.GetComponent<Frends_Data_Script>().GetCharaData();

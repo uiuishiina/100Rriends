@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59062fcf4b348e24aa1c95a2f4c9ca82, type: 3}
   m_Name: "\u30DE\u30B8\u6B7B\u306D"
   m_EditorClassIdentifier: 
-  TextData: "\u30DE\u30B8\u6B7B\u306D"
+  TextData: "\u8A71\u3057\u304B\u3051\u306A\u3044\u3067"
   Side: 0
   s: {fileID: 0}

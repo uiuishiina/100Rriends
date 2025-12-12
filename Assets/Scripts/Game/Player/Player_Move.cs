@@ -7,6 +7,7 @@ public class Player_Move : MonoBehaviour
     [SerializeField] float RotateSpeed;
     [SerializeField, Header("å©ÇΩñ⁄ÇÃëÃ")] GameObject Body;
     [SerializeField] PlayerTalkController PlayerTalkController;
+    [SerializeField] GameManager GameManager;
     Rigidbody rb;
     //-------  ïœêî  ------
     Vector3 Inputvec;
@@ -25,6 +26,10 @@ public class Player_Move : MonoBehaviour
     void OnSpace(InputValue input)
     {
         PlayerTalkController.OnSpace();
+    }
+    public void OnESC(InputValue inputValue)
+    {
+        GameManager.ESC();
     }
 
     private void Update()
