@@ -1,0 +1,9 @@
+using UnityEngine;
+using UnityEngine.UI;
+
+public class ReferenceManager : MonoBehaviour
+{
+    [Header("éQè∆")]
+    [SerializeField] public Slider BGMSlider;
+    [SerializeField] public Slider SESlider;
+}

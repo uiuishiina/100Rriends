@@ -24,12 +24,8 @@ public class Audio : MonoBehaviour
         SESlider.value = seVolume;
 
         // SEスライダーを離したときのイベントを追加
-
         EventTrigger trigger = SESlider.gameObject.AddComponent<EventTrigger>();
-        EventTrigger.Entry entry = new EventTrigger.Entry
-        {
-            eventID = EventTriggerType.PointerUp
-        };
+        EventTrigger.Entry entry = new EventTrigger.Entry{eventID = EventTriggerType.PointerUp};
         entry.callback.AddListener((data) => OnSESliderReleased());
         trigger.triggers.Add(entry);
     }

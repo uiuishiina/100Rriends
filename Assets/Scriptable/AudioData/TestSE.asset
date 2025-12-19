@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba4e13e7d1de1f646be606a58d078047, type: 3}
+  m_Name: TestSE
+  m_EditorClassIdentifier: 
+  Resource: {fileID: 8300000, guid: 4ee2981a01068b44fbb9173b5632d194, type: 3}
+  SetVolume: 1

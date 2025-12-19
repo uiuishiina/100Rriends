@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Frends
+  - SceneManager
   layers:
   - Default
   - TransparentFX

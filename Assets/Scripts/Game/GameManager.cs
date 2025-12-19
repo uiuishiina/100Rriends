@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Button Title;
     [SerializeField] Button Setting;
     [SerializeField, Header("タイマー")] float Time_;
+    
     bool end = false;
     private bool isPause = false;
     private bool S;
@@ -37,7 +38,6 @@ public class GameManager : MonoBehaviour
     private void P(bool pause)
     {
         if (pause) {
-            Debug.LogWarning("F");
             S = player.enabled;
             player.enabled = false;
             Ui.enabled = false;

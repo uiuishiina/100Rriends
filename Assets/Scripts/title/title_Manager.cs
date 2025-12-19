@@ -24,8 +24,8 @@ public class title_Manager : MonoBehaviour
         BackButton.onClick.AddListener(() => { 
             Panel.SetActive(false); 
         });
-        ValueSlider.onValueChanged.AddListener((float value) => { 
-            Dont.data_.ChengeVolume(value);
-        });
+        //ValueSlider.onValueChanged.AddListener((float value) => { 
+        //    Dont.data_.ChengeVolume(value);
+        //});
     }
 }
