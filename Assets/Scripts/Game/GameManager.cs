@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject pausePanel;
     [SerializeField] Button Title;
     [SerializeField] Button Setting;
+    [SerializeField, Header("タイマー")] float Time_;
+    bool end = false;
     private bool isPause = false;
     private bool S;
     private void Start()
@@ -56,12 +58,21 @@ public class GameManager : MonoBehaviour
     {
         TogglePause();
     }
-
     void TogglePause()
     {
         isPause = !isPause;
         P(isPause);
         pausePanel.SetActive(isPause);
         Time.timeScale = isPause ? 0f : 1f;
+    }
+    void End()
+    {
+
+    }
+    private void Update()
+    {
+        if (end) { return; }
+        if (Time_ < 0) { end = true;End(); }
+        Time_ -= Time.deltaTime;
     }
 }

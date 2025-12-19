@@ -680,6 +680,7 @@ MonoBehaviour:
   pausePanel: {fileID: 1047118871}
   Title: {fileID: 1780643379}
   Setting: {fileID: 550942569}
+  Time_: 120
 --- !u!4 &525302359
 Transform:
   m_ObjectHideFlags: 0
