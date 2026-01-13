@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab8bbcffbfb75df48b2b0f2e5ddca08c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 3
+  Speed: 9
   RotateSpeed: 2
   Body: {fileID: 1933636194}
   PlayerTalkController: {fileID: 1036390589}
@@ -1736,7 +1736,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character_Data: {fileID: 11400000, guid: 636207d165e00054190c44c5a6789a2d, type: 2}
-  TextData: {fileID: 11400000, guid: b8332ed5aa4954d42ab14d64845c4798, type: 2}
+  TextData:
+  - {fileID: 11400000, guid: b8332ed5aa4954d42ab14d64845c4798, type: 2}
+  - {fileID: 11400000, guid: 500c931ac471cd94f907815e710fa7f4, type: 2}
+  count: 0
 --- !u!136 &907333120
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2894,7 +2897,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character_Data: {fileID: 11400000, guid: 979f575362f0a294fb89489f47bf47bd, type: 2}
-  TextData: {fileID: 11400000, guid: 0dc7f11709430444087e4ee565eceed8, type: 2}
+  TextData: []
+  count: 0
 --- !u!135 &1640528367
 SphereCollider:
   m_ObjectHideFlags: 0
