@@ -25,7 +25,10 @@ public class Player_Move : MonoBehaviour
 
     void OnSpace(InputValue input)
     {
-        PlayerTalkController.OnSpace();
+        var a = GameObject.Find("AudioManager");
+        if (a != null) { a.GetComponent<AudioManager>().PLAYSE(); }
+        else { Debug.Log("not audiomanager"); }
+        //PlayerTalkController.OnSpace();
     }
     public void OnESC(InputValue inputValue)
     {

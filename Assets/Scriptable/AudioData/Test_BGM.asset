@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba4e13e7d1de1f646be606a58d078047, type: 3}
-  m_Name: TestSE
-  m_EditorClassIdentifier: 
-  Title: {fileID: 8300000, guid: 319e1aa879866ac45bf4a7d9bbd063f3, type: 3}
-  Talk: {fileID: 8300000, guid: 319e1aa879866ac45bf4a7d9bbd063f3, type: 3}
-  TagtheFlag: {fileID: 8300000, guid: 319e1aa879866ac45bf4a7d9bbd063f3, type: 3}
-  SetVolume: 0.023983112
+  m_Name: Test_BGM
+  m_EditorClassIdentifier: Assembly-CSharp::Audio_Data
+  Title: {fileID: 8300000, guid: 14dba18e03089ae489152d9d4e78c24a, type: 3}
+  Talk: {fileID: 8300000, guid: 068be82b815496a4fb21006cff2a34a4, type: 3}
+  TagtheFlag: {fileID: 8300000, guid: 24ee1a2418c7fb44ea4b96a56e650b28, type: 3}
+  SetVolume: 0.032846507

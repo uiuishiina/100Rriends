@@ -28,8 +28,15 @@ public class AudioManager : MonoBehaviour
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        BGMSource.Stop();
+        SESource.Stop();
         var g = GameObject.Find("SceneManager");
-        if (g == null) { Debug.Log("A"); return; }
+        if (g == null) { Debug.Log("Not Found SceneManager"); return; }
+        AudioClip UseSE = null;
+        AudioClip UseBGM = null;
+        if (scene.name == "TitleScene") { UseSE = SEData_.Title; UseBGM = BGMData_.Title; }
+        if (scene.name == "GameScene") { UseSE = SEData_.Talk; UseBGM = BGMData_.Talk; }
+        if (scene.name == "TagtheFlagScene") { UseSE = SEData_.TagtheFlag; UseBGM = BGMData_.TagtheFlag; }
         BGMSlider = g.GetComponent<ReferenceManager>().BGMSlider;
         SESlider = g.GetComponent<ReferenceManager>().SESlider;
         EventTrigger SETrigger = SESlider.gameObject.AddComponent<EventTrigger>();
@@ -41,20 +48,21 @@ public class AudioManager : MonoBehaviour
         SESlider.onValueChanged.AddListener((float value) => { ChangeVolume(value, SESource,SEData_); });
         BGMSlider.onValueChanged.AddListener((float value) => { ChangeVolume(value, BGMSource,BGMData_); });
 
-        SetSE(SEData_);
-        SetBGM(BGMData_);
+        SetSE(UseSE, SEData_.SetVolume);
+        SetBGM(UseBGM, BGMData_.SetVolume);
         SetSliderValue();
+        BGMSource.Play();
     }
 
-    void SetSE(Audio_Data data)
+    void SetSE(AudioClip data,float value)
     {
-        SESource.clip = data.Resource;
-        SESource.volume = data.SetVolume;
+        SESource.clip = data;
+        SESource.volume = value;
     }
-    void SetBGM(Audio_Data data)
+    void SetBGM(AudioClip data, float value)
     {
-        BGMSource.clip = data.Resource;
-        BGMSource.volume = data.SetVolume;
+        BGMSource.clip = data;
+        BGMSource.volume = value;
     }
     void SetSliderValue()
     {
@@ -76,5 +84,10 @@ public class AudioManager : MonoBehaviour
         else {
             Debug.LogWarning("TestSE AudioSource Ç‹ÇΩÇÕ clip Ç™ê›íËÇ≥ÇÍÇƒÇ¢Ç‹ÇπÇÒÅB");
         }
+    }
+
+    public void PLAYSE()
+    {
+        SESource.PlayOneShot(SESource.clip);
     }
 }
