@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 118a3bceaa059fa46b2ff0656acb8c82, type: 3}
-  m_Name: "\u53CB\u91CE\u767E"
+  m_Name: "\u76F8\u6CA2\u52C7\u5E0C"
   m_EditorClassIdentifier: Assembly-CSharp::Character_Data
-  Name: "\u53CB\u91CE\u767E"
-  Image: {fileID: 2031258151, guid: c2baf5a307f826542a4455a4e933d43f, type: 3}
+  Name: "\u76F8\u6CA2\u52C7\u5E0C"
+  Image: {fileID: -392781804, guid: 6b28f0c0f7058d24e808713902a9cae9, type: 3}
   LikeValue: 0

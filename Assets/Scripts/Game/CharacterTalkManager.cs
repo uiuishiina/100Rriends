@@ -15,6 +15,8 @@ public class CharacterTalkManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI left;
     [SerializeField] GameObject RightButton;
     [SerializeField] TextMeshProUGUI right;
+    [SerializeField] Image PlayerImage;
+    [SerializeField] Image FriendsImage;
     [Header("ã@î\éQè∆")]
     [SerializeField] GameManager gameManager;
     [SerializeField] text_cs conttext;
@@ -64,6 +66,8 @@ public class CharacterTalkManager : MonoBehaviour
     }
     IEnumerator Manage(){
         TalkUI.SetActive(true);
+        if (Player_Data.Image != null) { PlayerImage.sprite = Player_Data.Image; }
+        if (CharacterData.Image != null) { FriendsImage.sprite = CharacterData.Image; }
         yield return StartCoroutine(col(Textdata.Datas,CharacterData));
         TalkUI.SetActive(false);
         gameManager.c(true);
@@ -78,7 +82,7 @@ public class CharacterTalkManager : MonoBehaviour
                 Nametext.text = Player_Data.Name;
             }
             else  {
-                Nametext.text = CharacterData.Name;
+                Nametext.text = charaData.Name;
             }
                 yield return StartCoroutine(conttext.TextActive(Talktext, item.TextData));
             if (item.s != null) {
