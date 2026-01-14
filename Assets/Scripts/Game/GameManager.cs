@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject pausePanel;
     [SerializeField] Button Title;
     [SerializeField] Button Setting;
+    [SerializeField] Button Back;
+    [SerializeField] GameObject SettingPanel;
     [SerializeField, Header("タイマー")] float Time_;
     
     bool end = false;
@@ -25,8 +27,14 @@ public class GameManager : MonoBehaviour
         Title.onClick.AddListener(() => {
             SceneManager.LoadScene("TitleScene");
         });
-
+        Setting.onClick.AddListener(() => {
+            SettingPanel.SetActive(true);
+        });
+        Back.onClick.AddListener(() => {
+            SettingPanel.SetActive(false);
+        });
         pausePanel.SetActive(false);
+        SettingPanel.SetActive(false);
     }
 
     public void c(bool a)
@@ -63,11 +71,12 @@ public class GameManager : MonoBehaviour
         isPause = !isPause;
         P(isPause);
         pausePanel.SetActive(isPause);
+        SettingPanel.SetActive(false);
         Time.timeScale = isPause ? 0f : 1f;
     }
     void End()
     {
-
+        SceneManager.LoadScene("ResultScene");
     }
     private void Update()
     {
