@@ -9,6 +9,7 @@ public class TagGameManager : MonoBehaviour
     private void Start()
     {
         pl.GetComponent<TagMove>().StartDamon();
+        ChengeDamon(Players[2]);
     }
     public void ChengeDamon(GameObject gameObject)
     {

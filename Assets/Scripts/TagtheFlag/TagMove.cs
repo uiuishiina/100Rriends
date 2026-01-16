@@ -13,6 +13,7 @@ public class TagMove : MonoBehaviour
     float rote = 5;
     //------  ‹S‘¤‚©“¦‚°‚é‘¤  ------
     public float Speed { private set; get; } = 5;
+    public float DSpeed { private set; get; } = 7;
     public bool IsDemon { protected set; get; } = false;
 
     //------  player  ------
@@ -50,8 +51,10 @@ public class TagMove : MonoBehaviour
     private void Update()
     {
         if (IsStop) { return; }
-        rb.linearVelocity = new Vector3(inputvec.x * Speed, rb.linearVelocity.y, inputvec.y * Speed);
-        if (inputvec.magnitude < 0.1) {
+        if (IsDemon) { rb.linearVelocity = new Vector3(inputvec.x * DSpeed, rb.linearVelocity.y, inputvec.y * DSpeed); }
+        else { rb.linearVelocity = new Vector3(inputvec.x * Speed, rb.linearVelocity.y, inputvec.y * Speed); }
+        if (inputvec.magnitude < 0.1)
+        {
             return;
         }
         var angle = Mathf.Atan2(inputvec.x, inputvec.y) * Mathf.Rad2Deg;
@@ -63,10 +66,9 @@ public class TagMove : MonoBehaviour
     {
         IsDemon = true;
     }
-    public void SendChengeDamon(GameObject D)
+    public virtual void SendChengeDamon(GameObject D)
     {
         Damon = D;
-        Debug.Log("CD"+this.gameObject);
     }
     virtual public void Touch(GameObject Player,bool Isd)
     {

@@ -34,24 +34,33 @@ public class NaviMove : TagMove
         if (Target == null) return;
         if (!IsDemon) {
             var l = Mathf.Abs((Damon.transform.position - transform.position).magnitude);
-            if (l < 5) {
-                Debug.Log("TIkai");
+            if (l < 10) {
                 FindPoints(true);
             }
         }
-        if (Agent.remainingDistance < 0.2f) {
-            if (IsDemon) {
-                var g = touch_Script.Get();
-                if (g == null) return;Debug.Log("Eto");
-                var o = g.GetComponent<TagMove>();
-                if (o == null) return;
-                o.Touch(this.gameObject, IsDemon);
-                IsDemon = false;
-                
+        else
+        {
+            FindPlayer();
+        }
+        if (Agent.remainingDistance < 1.0f)
+        {
+            if (IsDemon)
+            {
             }
             else FindPoints(false);
         }
-        Agent.destination = Target.transform.position;
+        if (IsDemon)
+        {
+            var g = touch_Script.Get();
+            if (g == null) return;
+            var o = g.GetComponent<TagMove>();
+            if (o == null) return;
+            o.Touch(this.gameObject, IsDemon);
+            IsDemon = false;
+        }
+        if (IsDemon) { Agent.speed = DSpeed; }
+        else { Agent.speed = Speed; }
+        Agent.SetDestination(Target.transform.position);
     }
     private void FindPlayer()
     {
@@ -65,7 +74,7 @@ public class NaviMove : TagMove
             float dist = 0;
             var pos = transform.position;
             Agent.SetDestination(G.transform.position);
-            foreach(var C in Agent.path.corners) {
+            foreach (var C in Agent.path.corners) {
                 var C2 = C;
                 dist += Vector3.Distance(pos, C2);
                 pos = C2;
@@ -75,6 +84,7 @@ public class NaviMove : TagMove
                 T = G;
             }
         }
+        Agent.SetDestination(transform.position);
         Target = T;
         Agent.isStopped = false;
     }
@@ -161,5 +171,10 @@ public class NaviMove : TagMove
         yield return null;
     }
 
-
+    public override void SendChengeDamon(GameObject D)
+    {
+        Damon = D;
+        if (D == this.gameObject) { IsDemon = true; FindPlayer(); }
+        else FindPoints(true);
+    }
 }

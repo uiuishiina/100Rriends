@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: "\u53CB\u91CE\u767E"
   m_EditorClassIdentifier: Assembly-CSharp::Character_Data
   Name: "\u53CB\u91CE\u767E"
-  Image: {fileID: 2031258151, guid: c2baf5a307f826542a4455a4e933d43f, type: 3}
+  Image: {fileID: 1144484538, guid: 2882822c57090714a84c0c7d2e067044, type: 3}
   LikeValue: 0
