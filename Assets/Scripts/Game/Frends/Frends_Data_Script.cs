@@ -7,12 +7,18 @@ public class Frends_Data_Script : MonoBehaviour
     [SerializeField, Header("º‚ð‚©‚¯‚½‰ñ”")] public int count = 0;
     public MakeConversation_Text_Data GetTextData()
     {
-        count++;
-        if (count > 10) { return TextData[1]; }
-        return TextData[0];
+        
+        if (count == 0 ) { count++; return TextData[0]; }
+        
+        return TextData[1];
     }
     public Character_Data GetCharaData()
     {
         return character_Data;
+    }
+    private void Start()
+    {
+        if (!character_Data.Body) { return; }
+        Instantiate(character_Data.Body,gameObject.transform);
     }
 }

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2622d8bd98f1e948a76b00748ecff61, type: 3}
+  m_Name: "\u50D5\u306F\u2026"
+  m_EditorClassIdentifier: 
+  TextData: "\u50D5\u306F\u2026"
+  Side: 1
+  s: {fileID: 11400000}
+  IsLoad: 0
+  SceneName: 
+  Switch_Data:
+  - Switched_Title: "\u3054\u306F\u3093\u3068\u304A\u5473\u564C\u6C41\u3060\u3088\u3000"
+    Switched_Data:
+    - {fileID: 11400000, guid: ea0d1b3007edc0b4195065c4188c34f2, type: 2}
+    - {fileID: 11400000, guid: b5c3262fd2605f949a7d4b1533e5ccb3, type: 2}
+    - {fileID: 11400000, guid: 8a5eaa144dba3ad4f8fc2b498716f4c0, type: 2}
+  - Switched_Title: "\u3042\u3001\u671D\u306F\u30D1\u30F3\u3092\u98DF\u3079\u305F\u3088 "
+    Switched_Data:
+    - {fileID: 11400000, guid: ea0d1b3007edc0b4195065c4188c34f2, type: 2}
+    - {fileID: 11400000, guid: b5c3262fd2605f949a7d4b1533e5ccb3, type: 2}
+    - {fileID: 11400000, guid: 8a5eaa144dba3ad4f8fc2b498716f4c0, type: 2}

@@ -31,32 +31,35 @@ public class NaviMove : TagMove
     private void Update()
     {
         if (IsStop) return;
-        if (Target == null) return;
-        if (!IsDemon) {
-            var l = Mathf.Abs((Damon.transform.position - transform.position).magnitude);
-            if (l < 10) {
-                FindPoints(true);
+        if (Target == null){
+            if (IsDemon){
+                FindPlayer();
+            }
+            else{
+                FindPoints(false);
             }
         }
-        else
-        {
-            FindPlayer();
+        else{
+            if (IsDemon){
+                FindPlayer();
+            }
+            else{
+                var l = Mathf.Abs((Damon.transform.position - transform.position).magnitude);
+                if (l < 10){
+                    FindPoints(true);
+                }
+            }
         }
-        if (Agent.remainingDistance < 1.0f)
-        {
-            if (IsDemon)
-            {
+        if (Agent.remainingDistance < 1.0f){
+            if (IsDemon){
+                var g = touch_Script.Get();
+                if (g == null) return;
+                var o = g.GetComponent<TagMove>();
+                if (o == null) return;
+                o.Touch(this.gameObject, IsDemon);
+                IsDemon = false;
             }
             else FindPoints(false);
-        }
-        if (IsDemon)
-        {
-            var g = touch_Script.Get();
-            if (g == null) return;
-            var o = g.GetComponent<TagMove>();
-            if (o == null) return;
-            o.Touch(this.gameObject, IsDemon);
-            IsDemon = false;
         }
         if (IsDemon) { Agent.speed = DSpeed; }
         else { Agent.speed = Speed; }
@@ -174,7 +177,6 @@ public class NaviMove : TagMove
     public override void SendChengeDamon(GameObject D)
     {
         Damon = D;
-        if (D == this.gameObject) { IsDemon = true; FindPlayer(); }
-        else FindPoints(true);
+        if (D == this.gameObject) { IsDemon = true; }
     }
 }
