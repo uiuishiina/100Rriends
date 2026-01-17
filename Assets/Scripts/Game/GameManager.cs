@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Button Back;
     [SerializeField] GameObject SettingPanel;
     [SerializeField, Header("タイマー")] float Time_;
+    [SerializeField, Header("タイマー")] TextMeshProUGUI TimeText_;
     
     bool end = false;
     private bool isPause = false;
@@ -83,5 +85,6 @@ public class GameManager : MonoBehaviour
         if (end) { return; }
         if (Time_ < 0) { end = true;End(); }
         Time_ -= Time.deltaTime;
+        TimeText_.text = ((int)Time_).ToString();
     }
 }
