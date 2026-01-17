@@ -16,6 +16,8 @@ public class TagMove : MonoBehaviour
     public float DSpeed { private set; get; } = 7;
     public bool IsDemon { protected set; get; } = false;
 
+    public bool IsStart = true;
+
     //------  player  ------
     private Rigidbody rb;
     private Vector2 inputvec;
@@ -50,6 +52,7 @@ public class TagMove : MonoBehaviour
     }
     private void Update()
     {
+        if(IsStart) { return; }
         if (IsStop) { return; }
         if (IsDemon) { rb.linearVelocity = new Vector3(inputvec.x * DSpeed, rb.linearVelocity.y, inputvec.y * DSpeed); }
         else { rb.linearVelocity = new Vector3(inputvec.x * Speed, rb.linearVelocity.y, inputvec.y * Speed); }

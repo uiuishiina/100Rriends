@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using Vector3 = UnityEngine.Vector3;
@@ -30,7 +31,8 @@ public class NaviMove : TagMove
     }
     private void Update()
     {
-        if (IsStop) return;
+        if (IsStart){Debug.Log("ISStart"); return;}
+        if (IsStop) { Debug.Log("ISStop"); return; } 
         if (Target == null){
             if (IsDemon){
                 FindPlayer();
@@ -52,12 +54,14 @@ public class NaviMove : TagMove
         }
         if (Agent.remainingDistance < 1.0f){
             if (IsDemon){
-                var g = touch_Script.Get();
-                if (g == null) return;
-                var o = g.GetComponent<TagMove>();
-                if (o == null) return;
-                o.Touch(this.gameObject, IsDemon);
-                IsDemon = false;
+                if (null!= touch_Script.Get()){
+                    var g = touch_Script.Get();
+                    if(null!= g.GetComponent<TagMove>())
+                    {
+                        g.GetComponent<TagMove>().Touch(this.gameObject, IsDemon);
+                        IsDemon = false;
+                    }
+                }
             }
             else FindPoints(false);
         }
@@ -71,23 +75,16 @@ public class NaviMove : TagMove
         var Min = 100f;
         GameObject T = null;
         Agent.isStopped = true;
+        var pos = transform.position;
         foreach (var G in Players)
         {
             if (G == this.gameObject) continue;
-            float dist = 0;
-            var pos = transform.position;
-            Agent.SetDestination(G.transform.position);
-            foreach (var C in Agent.path.corners) {
-                var C2 = C;
-                dist += Vector3.Distance(pos, C2);
-                pos = C2;
-            }
+            var dist = Vector3.Distance(pos, G.transform.position);
             if(Min > dist) {
                 Min = dist;
                 T = G;
             }
         }
-        Agent.SetDestination(transform.position);
         Target = T;
         Agent.isStopped = false;
     }
