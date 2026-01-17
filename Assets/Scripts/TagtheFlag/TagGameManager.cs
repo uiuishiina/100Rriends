@@ -3,6 +3,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEngine.Rendering.DebugUI;
 
 public class TagGameManager : MonoBehaviour
 {
@@ -14,21 +15,33 @@ public class TagGameManager : MonoBehaviour
     bool IsStart = false;
     [SerializeField, Header("タイマー")] private float Time_;
     [SerializeField, Header("タイマー")] TextMeshProUGUI TimeText_;
-    [SerializeField, Header("タイマー")] TextMeshProUGUI CountText_;
+    [SerializeField, Header("カウントダウン")] TextMeshProUGUI CountText_;
+    [SerializeField, Header("カウントダウン")] TextMeshProUGUI TachiText_;
 
     private void Start()
     {
         pl.GetComponent<TagMove>().StartDamon();
-        ChengeDamon(Players[2]);
+        ChengeDamon(Players[2],false);
         StartCoroutine(StartCall(4));
+        TachiText_.enabled = false;
     }
-    public void ChengeDamon(GameObject gameObject)
+    public void ChengeDamon(GameObject gameObject,bool a = true)
     {
-        Debug.Log("newDamon:" + gameObject);
         Damon = gameObject;
         foreach (var G in Players) {
             G.GetComponent<TagMove>().SendChengeDamon(Damon);
         }
+        if (a) { StartCoroutine(Taci()); }
+    }
+    IEnumerator Taci()
+    {
+        TachiText_.text = "タッチ";
+        TachiText_.enabled = true;
+        for (int i = 10; i > 0; i--){
+            TachiText_.alpha = i * 0.1f;
+            yield return new WaitForSeconds(0.1f);
+        }
+        TachiText_.enabled = false;
     }
     IEnumerator StartCall(int value)
     {

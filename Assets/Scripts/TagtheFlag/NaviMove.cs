@@ -13,6 +13,7 @@ public class NaviMove : TagMove
     private GameObject[] Points;
     private GameObject[] Players;
     public GameObject Target;
+    private GameObject LastD;
     protected override void Awake()
     {
         Agent = GetComponent<NavMeshAgent>();
@@ -22,7 +23,7 @@ public class NaviMove : TagMove
         gameManager = GameObject.Find("TagGameManager").GetComponent<TagGameManager>();
         touch_Script = transform.Find("Touch").GetComponent<Touch_script>();
         if (touch_Script == null) { Debug.LogError("NotFound,Touch_script"); return; }
-        Body = transform.Find("Body").gameObject;
+        Body = GameObject.Instantiate(Data.Body, this.transform);
         if (Body == null) { Debug.LogError("NotFound,Touch_script"); return; }
         Agent = GetComponent<NavMeshAgent>();
         if (Agent == null) { Debug.LogError("NotFound,NavMesh"); }
@@ -52,7 +53,7 @@ public class NaviMove : TagMove
                 }
             }
         }
-        if (Agent.remainingDistance < 1.0f){
+        if (Agent.remainingDistance < 2.0f){
             if (IsDemon){
                 if (null!= touch_Script.Get()){
                     var g = touch_Script.Get();
@@ -79,6 +80,7 @@ public class NaviMove : TagMove
         foreach (var G in Players)
         {
             if (G == this.gameObject) continue;
+            if (LastD != null && G == LastD) { continue; }
             var dist = Vector3.Distance(pos, G.transform.position);
             if(Min > dist) {
                 Min = dist;
@@ -173,6 +175,7 @@ public class NaviMove : TagMove
 
     public override void SendChengeDamon(GameObject D)
     {
+        LastD = Damon;
         Damon = D;
         if (D == this.gameObject) { IsDemon = true; }
     }

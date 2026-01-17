@@ -11,9 +11,10 @@ public class TagMove : MonoBehaviour
     protected Touch_script touch_Script;
     protected GameObject Body;
     float rote = 5;
+    [SerializeField, Header("キャラクターデータ")] protected Character_Data Data;
     //------  鬼側か逃げる側  ------
     public float Speed { private set; get; } = 5;
-    public float DSpeed { private set; get; } = 7;
+    public float DSpeed { private set; get; } = 8;
     public bool IsDemon { protected set; get; } = false;
 
     public bool IsStart = true;
@@ -32,7 +33,7 @@ public class TagMove : MonoBehaviour
         gameManager = GameObject.Find("TagGameManager").GetComponent<TagGameManager>();
         touch_Script = transform.Find("Touch").GetComponent<Touch_script>();
         if (touch_Script == null) { Debug.LogError("NotFound,Touch_script"); return; }
-        Body = transform.Find("Body").gameObject;
+        Body = GameObject.Instantiate(Data.Body,this.transform);
         if (Body == null) { Debug.LogError("NotFound,Touch_script"); return; }
     }
     private void OnMove(InputValue inputValue)

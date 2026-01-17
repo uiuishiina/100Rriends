@@ -37,6 +37,7 @@ public class AudioManager : MonoBehaviour
         if (scene.name == "TitleScene") { UseSE = SEData_.Title; UseBGM = BGMData_.Title; }
         if (scene.name == "GameScene") { UseSE = SEData_.Talk; UseBGM = BGMData_.Talk; }
         if (scene.name == "TagtheFlagScene") { UseSE = SEData_.TagtheFlag; UseBGM = BGMData_.TagtheFlag; }
+        if (scene.name == "ResultScene") { UseSE = SEData_.ResultFlag; UseBGM = BGMData_.ResultFlag; }
         BGMSlider = g.GetComponent<ReferenceManager>().BGMSlider;
         SESlider = g.GetComponent<ReferenceManager>().SESlider;
         EventTrigger SETrigger = SESlider.gameObject.AddComponent<EventTrigger>();
