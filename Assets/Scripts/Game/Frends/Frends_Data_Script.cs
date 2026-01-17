@@ -10,7 +10,7 @@ public class Frends_Data_Script : MonoBehaviour
         
         if (count == 0 ) { count++; return TextData[0]; }
         
-        return TextData[1];
+        return TextData[Random.Range(1,TextData.Length)];
     }
     public Character_Data GetCharaData()
     {

@@ -2608,7 +2608,7 @@ MonoBehaviour:
   - {fileID: 915191221}
   Damon: {fileID: 0}
   pl: {fileID: 46185770}
-  Time_: 10
+  Time_: 120
   TimeText_: {fileID: 1749248283}
   CountText_: {fileID: 1193693063}
 --- !u!4 &874279065

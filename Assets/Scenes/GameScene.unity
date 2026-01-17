@@ -2190,6 +2190,8 @@ MonoBehaviour:
   TextData:
   - {fileID: 11400000, guid: c8433ead5fc864c419b87aded706d6a2, type: 2}
   - {fileID: 11400000, guid: 1e20a538e5c02084e9d8add80affd272, type: 2}
+  - {fileID: 11400000, guid: 6dbacaef35a2c614997c0a8bb28ef466, type: 2}
+  - {fileID: 11400000, guid: 5159ba221ca3b34409e9eb474c8ac70c, type: 2}
   count: 0
 --- !u!136 &907333120
 CapsuleCollider:

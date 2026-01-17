@@ -15,5 +15,5 @@ MonoBehaviour:
   TextData: "\u3088\u3057\uFF01\u3058\u3083\u3042\u30B0\u30E9\u30A6\u30F3\u30C9\u96C6\u5408\u306A\uFF01"
   Side: 0
   s: {fileID: 0}
-  IsLoad: 0
-  SceneName: 
+  IsLoad: 1
+  SceneName: TagtheFlagScene
