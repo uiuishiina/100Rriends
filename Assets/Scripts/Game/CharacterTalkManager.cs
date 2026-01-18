@@ -33,7 +33,6 @@ public class CharacterTalkManager : MonoBehaviour
     int num;
     private void Start()
     {
-        //StartCoroutine(col(data.Datas));
         LeftButton.GetComponent<Button>().onClick.AddListener(() => { Click(0); });
         RightButton.GetComponent<Button>().onClick.AddListener(() => { Click(1); });
         CButton(false);
@@ -78,11 +77,15 @@ public class CharacterTalkManager : MonoBehaviour
     {
         foreach (var item in data)
         {
+            PlayerImage.color = new Color(0.5f, 0.5f, 0.5f, 1);
+            FriendsImage.color = new Color(0.5f, 0.5f, 0.5f, 1);
             if (item.Side)  {
                 Nametext.text = Player_Data.Name;
+                PlayerImage.color = new Color(1, 1, 1, 1);
             }
             else  {
                 Nametext.text = charaData.Name;
+                FriendsImage.color = new Color(1, 1, 1, 1);
             }
                 yield return StartCoroutine(conttext.TextActive(Talktext, item.TextData));
             if (item.s != null) {
