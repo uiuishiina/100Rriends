@@ -8,9 +8,10 @@ public class Frends_Data_Script : MonoBehaviour
     public MakeConversation_Text_Data GetTextData()
     {
         
-        if (count == 0 ) { count++; return TextData[0]; }
+        //if (count == 0 ) { count++; return TextData[0]; }
         
-        return TextData[Random.Range(1,TextData.Length)];
+       // return TextData[Random.Range(1,TextData.Length)];
+        return TextData[2];
     }
     public Character_Data GetCharaData()
     {

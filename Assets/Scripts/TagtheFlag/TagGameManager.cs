@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Numerics;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -9,8 +11,10 @@ public class TagGameManager : MonoBehaviour
 {
     [Header("プレイヤー配列")] public GameObject[] Players;
     [Header("Point配列")] public GameObject[] Points;
-    [SerializeField, Header("鬼")] public GameObject Damon;
     public GameObject pl;
+    [Header("鬼")] public List<GameObject> Damon = new List<GameObject>();
+    
+    
     private bool end;
     bool IsStart = false;
     [SerializeField, Header("タイマー")] private float Time_;
@@ -21,17 +25,26 @@ public class TagGameManager : MonoBehaviour
     private void Start()
     {
         pl.GetComponent<TagMove>().StartDamon();
-        ChengeDamon(Players[2],false);
+        ChengeDamon(Players[0],false);
         StartCoroutine(StartCall(4));
         TachiText_.enabled = false;
     }
     public void ChengeDamon(GameObject gameObject,bool a = true)
     {
-        Damon = gameObject;
-        foreach (var G in Players) {
+        Damon.Add(gameObject);
+        foreach (var G in Players)
+        {
             G.GetComponent<TagMove>().SendChengeDamon(Damon);
         }
-        if (a) { StartCoroutine(Taci()); }
+        foreach (var p in Players)
+        {
+            if(!p.GetComponent<TagMove>().IsDemon)
+            {
+                if (a) { StartCoroutine(Taci()); }
+                return;
+            }
+        }
+        End();
     }
     IEnumerator Taci()
     {
@@ -74,6 +87,17 @@ public class TagGameManager : MonoBehaviour
         foreach (var G in Players)
         {
             G.GetComponent<TagMove>().IsStart = true;
+        }
+        StartCoroutine(Endcol());
+
+    }
+    IEnumerator Endcol()
+    {
+        CountText_.enabled = true;
+        CountText_.text = "クリア！";
+        for (int i = 0; i < 3; i++)
+        {
+            yield return new WaitForSeconds(1);
         }
         SceneManager.LoadScene("ResultScene");
     }

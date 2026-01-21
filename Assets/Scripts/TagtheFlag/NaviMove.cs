@@ -13,7 +13,6 @@ public class NaviMove : TagMove
     private GameObject[] Points;
     private GameObject[] Players;
     public GameObject Target;
-    private GameObject LastD;
     protected override void Awake()
     {
         Agent = GetComponent<NavMeshAgent>();
@@ -25,6 +24,7 @@ public class NaviMove : TagMove
         if (touch_Script == null) { Debug.LogError("NotFound,Touch_script"); return; }
         Body = GameObject.Instantiate(Data.Body, this.transform);
         if (Body == null) { Debug.LogError("NotFound,Touch_script"); return; }
+        Body.GetComponent<ParticleSystem>().Stop();
         Agent = GetComponent<NavMeshAgent>();
         if (Agent == null) { Debug.LogError("NotFound,NavMesh"); }
         Points = gameManager.Points;
@@ -32,8 +32,8 @@ public class NaviMove : TagMove
     }
     private void Update()
     {
-        if (IsStart){Debug.Log("ISStart"); return;}
-        if (IsStop) { Debug.Log("ISStop"); return; } 
+        if (IsStart){ return;}
+        if (IsStop) { return; } 
         if (Target == null){
             if (IsDemon){
                 FindPlayer();
@@ -47,9 +47,12 @@ public class NaviMove : TagMove
                 FindPlayer();
             }
             else{
-                var l = Mathf.Abs((Damon.transform.position - transform.position).magnitude);
-                if (l < 10){
-                    FindPoints(true);
+                foreach (var g in Damon){
+                    var l = Mathf.Abs((g.transform.position - transform.position).magnitude);
+                    if (l < 10)
+                    {
+                        FindPoints(true);
+                    }
                 }
             }
         }
@@ -60,7 +63,7 @@ public class NaviMove : TagMove
                     if(null!= g.GetComponent<TagMove>())
                     {
                         g.GetComponent<TagMove>().Touch(this.gameObject, IsDemon);
-                        IsDemon = false;
+                        FindPlayer();
                     }
                 }
             }
@@ -80,7 +83,7 @@ public class NaviMove : TagMove
         foreach (var G in Players)
         {
             if (G == this.gameObject) continue;
-            if (LastD != null && G == LastD) { continue; }
+            if (G.gameObject.GetComponent<TagMove>().IsDemon) { continue; }
             var dist = Vector3.Distance(pos, G.transform.position);
             if(Min > dist) {
                 Min = dist;
@@ -95,7 +98,16 @@ public class NaviMove : TagMove
         Target = null;
         var F = transform.forward;
         if (away) {
-            F = (transform.position - Damon.transform.position).normalized;
+            var l = 100.0f;
+            foreach (var g in Damon)
+            {
+                var pl = (transform.position - g.transform.position).magnitude;
+                if (l> pl)
+                {
+                    l = pl;
+                    F = transform.position - g.transform.position;
+                }
+            }
         }
         List<GameObject> v = new List<GameObject>();
         //ê≥ñ ÇÃÇ‚Ç¬ÇÇ∆ÇÈ
@@ -157,6 +169,8 @@ public class NaviMove : TagMove
             gameManager.ChengeDamon(this.gameObject);
             IsDemon = true;
             Agent.SetDestination(transform.position);
+            Body.GetComponent<MeshRenderer>().materials[0].color = Color.yellow;
+            Body.GetComponent<ParticleSystem>().Play();
             StartCoroutine(Stop());
         }
     }
@@ -173,10 +187,8 @@ public class NaviMove : TagMove
         yield return null;
     }
 
-    public override void SendChengeDamon(GameObject D)
+    public override void SendChengeDamon(List<GameObject> D)
     {
-        LastD = Damon;
         Damon = D;
-        if (D == this.gameObject) { IsDemon = true; }
     }
 }

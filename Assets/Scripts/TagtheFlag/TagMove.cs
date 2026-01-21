@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,7 +7,7 @@ public class TagMove : MonoBehaviour
 {
     //------  éQè∆  ------
     protected TagGameManager gameManager;
-    protected GameObject Damon;
+    [SerializeField]protected List<GameObject> Damon = new List<GameObject>();
 
     protected Touch_script touch_Script;
     protected GameObject Body;
@@ -48,8 +49,8 @@ public class TagMove : MonoBehaviour
         if (g == null) return;
         var o = g.GetComponent<TagMove>();
         if (o == null) return;
+        if (o.IsDemon) { return; }
         o.Touch(this.gameObject,IsDemon);
-        if(IsDemon) IsDemon = false;
     }
     private void Update()
     {
@@ -70,7 +71,7 @@ public class TagMove : MonoBehaviour
     {
         IsDemon = true;
     }
-    public virtual void SendChengeDamon(GameObject D)
+    public virtual void SendChengeDamon(List<GameObject> D)
     {
         Damon = D;
     }

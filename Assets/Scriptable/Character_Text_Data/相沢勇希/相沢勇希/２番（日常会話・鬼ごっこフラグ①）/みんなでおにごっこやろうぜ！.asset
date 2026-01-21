@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2622d8bd98f1e948a76b00748ecff61, type: 3}
   m_Name: "\u307F\u3093\u306A\u3067\u304A\u306B\u3054\u3063\u3053\u3084\u308D\u3046\u305C\uFF01"
   m_EditorClassIdentifier: 
-  TextData: "\u307F\u3093\u306A\u3067\u304A\u306B\u3054\u3063\u3053\u3084\u308D\u3046\u305C\uFF01"
+  TextData: "\u307F\u3093\u306A\u3067\u5897\u3048\u9B3C\u3084\u308D\u3046\u305C\uFF01"
   Side: 0
   s: {fileID: 11400000}
   IsLoad: 0
