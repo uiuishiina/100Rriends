@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: "\u76F8\u6CA2\u52C7\u5E0C"
   m_EditorClassIdentifier: Assembly-CSharp::Character_Data
   Name: "\u76F8\u6CA2\u52C7\u5E0C"
-  Image: {fileID: 861843159, guid: d610a227bb944b741b10668216a70e6d, type: 3}
+  Image:
+  - {fileID: 861843159, guid: d610a227bb944b741b10668216a70e6d, type: 3}
   LikeValue: 0
   Body: {fileID: 1079305653199592672, guid: 3b4e378644f22f948b4dc8cec570947a, type: 3}

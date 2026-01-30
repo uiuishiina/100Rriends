@@ -1,8 +1,9 @@
+using NUnit.Framework.Interfaces;
 using System.Collections;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class CharacterTalkManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class CharacterTalkManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI right;
     [SerializeField] Image PlayerImage;
     [SerializeField] Image FriendsImage;
+    [SerializeField,Header("ゲーム遷移")] GameObject[] GameButton;
     [Header("機能参照")]
     [SerializeField] GameManager gameManager;
     [SerializeField] text_cs conttext;
@@ -27,6 +29,7 @@ public class CharacterTalkManager : MonoBehaviour
     [SerializeField, Header("プレイヤー")] Character_Data Player_Data;
     public enum TextMeshProMode { TextMeshPro, TextMeshProUGUI, TMP_Text }
 
+    private IEnumerator colti;
     //------  変数  ------
     bool isTalk = false;
     bool PushBool = false;
@@ -63,11 +66,22 @@ public class CharacterTalkManager : MonoBehaviour
     {
         StartCoroutine(Manage());
     }
+    public void CTalk(MakeConversation_Text_Data data) { 
+        StopAllCoroutines();
+        colti = null;
+        StartCoroutine(CCOL(data.Datas));
+    }
+    IEnumerator CCOL(Setting_Text_Data[] data)
+    {
+        colti = col(data, CharacterData);
+        yield return StartCoroutine(colti);
+    }
     IEnumerator Manage(){
         TalkUI.SetActive(true);
-        if (Player_Data.Image != null) { PlayerImage.sprite = Player_Data.Image; }
-        if (CharacterData.Image != null) { FriendsImage.sprite = CharacterData.Image; }
-        yield return StartCoroutine(col(Textdata.Datas,CharacterData));
+        if (Player_Data.Image != null) { PlayerImage.sprite = Player_Data.Image[0]; }
+        if (CharacterData.Image != null) { FriendsImage.sprite = CharacterData.Image[0]; }
+        colti = col(Textdata.Datas, CharacterData);
+        yield return StartCoroutine(colti);
         TalkUI.SetActive(false);
         gameManager.c(true);
         yield break;
@@ -80,10 +94,12 @@ public class CharacterTalkManager : MonoBehaviour
             PlayerImage.color = new Color(0.5f, 0.5f, 0.5f, 1);
             FriendsImage.color = new Color(0.5f, 0.5f, 0.5f, 1);
             if (item.Side)  {
+                PlayerImage.sprite = Player_Data.Image[item.CHImageNum_];
                 Nametext.text = Player_Data.Name;
                 PlayerImage.color = new Color(1, 1, 1, 1);
             }
             else  {
+                FriendsImage.sprite = charaData.Image[item.CHImageNum_];
                 Nametext.text = charaData.Name;
                 FriendsImage.color = new Color(1, 1, 1, 1);
             }

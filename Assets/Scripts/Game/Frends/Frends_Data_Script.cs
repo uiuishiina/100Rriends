@@ -6,19 +6,12 @@ public class Frends_Data_Script : MonoBehaviour
     [SerializeField, Header("会話データ")] private MakeConversation_Text_Data[] TextData;
     [SerializeField, Header("会話データ")] private MakeConversation_Text_Data ResultData;
     [SerializeField, Header("声をかけた回数")] public int count = 0;
+
     public MakeConversation_Text_Data GetTextData()
     {
-
-        var g = GameObject.Find("LogObject");
-        if(g!= null) {
-            count = g.GetComponent<LogObject>().count;
-            g.GetComponent<LogObject>().ADDCOUNT();
-        }
-        // 
-        //var g = GameObject.Find("LogObject");
-        //g.GetComponent<LogObject>().SetDataScript(ResultData, character_Data);
-        if (count == 0) { return TextData[0]; }
-
+        count++;
+        if (count == 1) { return TextData[0]; }
+        if(TextData.Length == 1) { return TextData[0]; }
         return TextData[Random.Range(1, TextData.Length)];
     }
     public Character_Data GetCharaData()
@@ -29,5 +22,15 @@ public class Frends_Data_Script : MonoBehaviour
     {
         if (!character_Data.Body) { return; }
         var g = Instantiate(character_Data.Body, gameObject.transform);
+        if (GameObject.Find("LogObject").GetComponent<LogObject>() != null) {
+            var data = GameObject.Find("LogObject").GetComponent<LogObject>().FrendsNames_.Find(name => name.Item1 == character_Data.Name);
+            if(data != default) {
+                count = data.Item2;
+            }
+        }
+    }
+    private void OnDestroy()
+    {
+        GameObject.Find("LogObject").GetComponent<LogObject>().AddFrendsName(character_Data.Name,count);
     }
 }

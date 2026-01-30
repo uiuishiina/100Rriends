@@ -97,9 +97,11 @@ public class TagGameManager : MonoBehaviour
     {
         CountText_.enabled = true;
         CountText_.text = text;
-        for (int i = 0; i < 3; i++)
-        {
+        for (int i = 0; i < 3; i++) {
             yield return new WaitForSeconds(1);
+        }
+        if(GameObject.Find("LogObject").GetComponent<LogObject>() != null) {
+            GameObject.Find("LogObject").GetComponent<LogObject>().AddFrends(Players.Length - 1);
         }
         if (ans) { SceneManager.LoadScene("GameScene"); }
         else { SceneManager.LoadScene("GameScene"); }
