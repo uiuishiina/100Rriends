@@ -13,7 +13,7 @@ public class TagGameManager : MonoBehaviour
     [Header("Point配列")] public GameObject[] Points;
     public GameObject pl;
     [Header("鬼")] public List<GameObject> Damon = new List<GameObject>();
-    
+    public Texture ONI;
     
     private bool end;
     bool IsStart = false;
@@ -44,7 +44,7 @@ public class TagGameManager : MonoBehaviour
                 return;
             }
         }
-        End();
+        End(true);
     }
     IEnumerator Taci()
     {
@@ -82,23 +82,26 @@ public class TagGameManager : MonoBehaviour
         Time_ -= Time.deltaTime;
         TimeText_.text = "Time:"+((int)Time_).ToString();
     }
-    void End()
+    void End(bool ans = false)
     {
         foreach (var G in Players)
         {
             G.GetComponent<TagMove>().IsStart = true;
         }
-        StartCoroutine(Endcol());
-
+        var te = "";
+        if (ans) { te = "クリア！"; }
+        else { te = "失敗"; }
+        StartCoroutine(Endcol(te, ans));
     }
-    IEnumerator Endcol()
+    IEnumerator Endcol(string text,bool ans)
     {
         CountText_.enabled = true;
-        CountText_.text = "クリア！";
+        CountText_.text = text;
         for (int i = 0; i < 3; i++)
         {
             yield return new WaitForSeconds(1);
         }
-        SceneManager.LoadScene("ResultScene");
+        if (ans) { SceneManager.LoadScene("GameScene"); }
+        else { SceneManager.LoadScene("GameScene"); }
     }
 }

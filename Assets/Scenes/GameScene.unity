@@ -2193,6 +2193,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6dbacaef35a2c614997c0a8bb28ef466, type: 2}
   - {fileID: 11400000, guid: 5159ba221ca3b34409e9eb474c8ac70c, type: 2}
   - {fileID: 11400000, guid: 165ac4f1e8e396a4697add4f81cf75b7, type: 2}
+  ResultData: {fileID: 11400000, guid: 989eea6df26cb454ba58ea6b85160dd2, type: 2}
   count: 0
 --- !u!136 &907333120
 CapsuleCollider:
@@ -4643,6 +4644,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1922664604}
   m_CullTransparentMesh: 1
+--- !u!1 &1925196278
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1925196280}
+  - component: {fileID: 1925196279}
+  m_Layer: 0
+  m_Name: LogObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1925196279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925196278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adaa738f013a9c148b87039f690c023f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LogObject
+  Data_: {fileID: 0}
+  CData_: {fileID: 0}
+  RC_: 0
+--- !u!4 &1925196280
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925196278}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2049993000
 GameObject:
   m_ObjectHideFlags: 0
@@ -4791,3 +4839,4 @@ SceneRoots:
   - {fileID: 1047118875}
   - {fileID: 928263424}
   - {fileID: 617544253}
+  - {fileID: 1925196280}

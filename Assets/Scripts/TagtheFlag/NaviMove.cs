@@ -5,6 +5,7 @@ using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 using Vector3 = UnityEngine.Vector3;
 
 public class NaviMove : TagMove
@@ -13,6 +14,7 @@ public class NaviMove : TagMove
     private GameObject[] Points;
     private GameObject[] Players;
     public GameObject Target;
+    public GameObject Image;
     protected override void Awake()
     {
         Agent = GetComponent<NavMeshAgent>();
@@ -24,7 +26,6 @@ public class NaviMove : TagMove
         if (touch_Script == null) { Debug.LogError("NotFound,Touch_script"); return; }
         Body = GameObject.Instantiate(Data.Body, this.transform);
         if (Body == null) { Debug.LogError("NotFound,Touch_script"); return; }
-        Body.GetComponent<ParticleSystem>().Stop();
         Agent = GetComponent<NavMeshAgent>();
         if (Agent == null) { Debug.LogError("NotFound,NavMesh"); }
         Points = gameManager.Points;
@@ -32,6 +33,7 @@ public class NaviMove : TagMove
     }
     private void Update()
     {
+        Image.transform.LookAt(Camera.main.transform);
         if (IsStart){ return;}
         if (IsStop) { return; } 
         if (Target == null){
@@ -170,7 +172,7 @@ public class NaviMove : TagMove
             IsDemon = true;
             Agent.SetDestination(transform.position);
             Body.GetComponent<MeshRenderer>().materials[0].color = Color.yellow;
-            Body.GetComponent<ParticleSystem>().Play();
+            Image.GetComponent<RawImage>().texture = gameManager.ONI;
             StartCoroutine(Stop());
         }
     }
