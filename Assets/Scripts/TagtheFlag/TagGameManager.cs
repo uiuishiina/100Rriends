@@ -32,7 +32,7 @@ public class TagGameManager : MonoBehaviour
     }
     public void ChengeDamon(GameObject gameObject,bool a = true)
     {
-        Time_--;
+        
         Damon.Add(gameObject);
         foreach (var G in Players)
         {
@@ -52,6 +52,7 @@ public class TagGameManager : MonoBehaviour
     {
         TachiText_.text = "ƒ^ƒbƒ`";
         TachiText_.enabled = true;
+        Time_--;
         for (int i = 10; i > 0; i--){
             TachiText_.alpha = i * 0.1f;
             yield return new WaitForSeconds(0.1f);
@@ -102,7 +103,7 @@ public class TagGameManager : MonoBehaviour
         }
         var G = GameObject.Find("LogObject");
         if (G != null) {
-            G.GetComponent<LogObject>().AddFrends(100);//Players.Length - 1
+            G.GetComponent<LogObject>().AddFrends(Players.Length - 1);//Players.Length - 1
         }
         SceneManager.LoadScene("GameScene");
     }

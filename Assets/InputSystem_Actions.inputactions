@@ -104,6 +104,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "LeftButton",
+                    "type": "Button",
+                    "id": "ee62b8e5-9365-4492-bf31-57c0f10f4d04",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -522,6 +531,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ESC",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "98068687-11a0-4caa-9225-1ab1876f36dd",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

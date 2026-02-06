@@ -16,7 +16,10 @@ MonoBehaviour:
   Side: 0
   s: {fileID: 11400000}
   IsLoad: 0
+  CHImageNum_: 0
   SceneName: 
+  FUP_: 0
+  UpF_: 0
   Switch_Data:
   - Switched_Title: "\u3044\u3044\u306D\uFF01\u6700\u9AD8\u3060\uFF01\u3000"
     Switched_Data:

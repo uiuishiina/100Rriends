@@ -9,7 +9,8 @@ public class LogObject : MonoBehaviour
 {
     public static GameObject Instance_;
     [SerializeField]public float Time_ = 0;
-    public int FriendsCount_ { get; set; } = 20;
+    public int FriendsCount_ { get; set; } = 60;
+    private int savec = 0;
 
     public List<(string,int)> FrendsNames_ = new List<(string, int)>();
     public List<string> Scenename_ = new List<string>();
@@ -29,10 +30,10 @@ public class LogObject : MonoBehaviour
         if (scene.name == "ResultScene") {
             
         }
-        else if (FriendsCount_ >= 100) {
+        else if ((FriendsCount_+ savec) >= 100) {
             SceneManager.LoadScene("ResultScene");
         }
-        if(scene.name == "GameScene") { game = true; return; }
+        if(scene.name == "GameScene") { game = true; AddFrends(0); return; }
         if(Scenename_.Contains(scene.name)) { return; }
         Scenename_.Add(scene.name);
     }
@@ -42,10 +43,12 @@ public class LogObject : MonoBehaviour
     }
     public void AddFrends(int count)
     {
-        FriendsCount_ += count;
+        savec += count;
         if (game)
         {
-            GameObject.Find("GameManager").GetComponent<GameManager>().UpCount(count);
+            FriendsCount_ += savec;
+            GameObject.Find("GameManager").GetComponent<GameManager>().UpCount(savec);
+            savec = 0;
         }
     }
     public void AddFrendsName(string name,int count)
@@ -56,7 +59,11 @@ public class LogObject : MonoBehaviour
     public void Result()
     {
         var T = GameObject.Find("TimerText");
-        if (T != null) { T.GetComponent<TextMeshProUGUI>().text = Time_.ToString() + " •b"; }
+        var min = ((int)Time_ % 3600) / 60;
+        var sec = (int)Time_ % 60;
+        if (T != null) {
+            T.GetComponent<TextMeshProUGUI>().text = min.ToString("D2") + ":" + sec.ToString("D2"); 
+        }
         //SceneManager.MoveGameObjectToScene(this.gameObject, SceneManager.GetActiveScene());
         SceneManager.sceneLoaded -= OnSceneLoaded;
         Destroy(Instance_);

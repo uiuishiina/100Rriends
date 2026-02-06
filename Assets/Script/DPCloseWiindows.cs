@@ -8,11 +8,11 @@ public class DPCloseWiindows : MonoBehaviour
     public GameObject pausePanel;
     private bool isPause = false;
 
-     
     void OnESC(InputValue inputValue)
     {
         TogglePause();
     }
+     
     void TogglePause() 
     {
         isPause = !isPause;

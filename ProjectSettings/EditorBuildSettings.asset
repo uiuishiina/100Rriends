@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ChairScene.unity
     guid: 456a6a51945f4ee4bb045984f6d8ddfb
+  - enabled: 1
+    path: Assets/Scenes/kesibato.unity
+    guid: 4a6defb2b3223c242b3445884db7ade6
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

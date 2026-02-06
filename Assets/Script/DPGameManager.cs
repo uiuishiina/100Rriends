@@ -1,73 +1,225 @@
-ï»¿using System.Collections;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 public class DPGameManager : MonoBehaviour
 {
-    public enum GameState {PlayerTurn, EnemyTurn, WaitMoving }
-    public GameState currentState = GameState.PlayerTurn;
+    public static DPGameManager Instance;
 
-    public Rigidbody playerRb;
-    public Rigidbody enemyRb;
+    [Header("ƒQ[ƒ€İ’è")]
+    [Tooltip("ƒQ[ƒ€‚Ì§ŒÀŠÔi•bj")]
+    public float gameTime = 30f;
 
-    private float stopThreshold = 0.05f;
-    private bool isObjectMoving = false;
+    [Tooltip("ƒXƒ^[ƒgƒJƒEƒ“ƒgƒ_ƒEƒ“‚ÌŠÔi•bj")]
+    public float startCountdownTime = 3f;
 
-    private void Update()
+    [Header("“G‚Ìİ’è")]
+    [Tooltip("“G‚ÌƒvƒŒƒnƒu")]
+    public GameObject enemyPrefab;
+
+    [Tooltip("“¯‚É‘¶İ‚Å‚«‚éÅ‘å“G”")]
+    public int maxEnemies = 10;
+
+    [Tooltip("“G‚ÌƒŠƒXƒ|[ƒ“ŠÔŠui•bj")]
+    public float enemyRespawnInterval = 2f;
+
+    [Tooltip("“G‚ÌoŒ»”ÍˆÍ X")]
+    public Vector2 enemySpawnRangeX = new Vector2(-5f, 5f);
+
+    [Tooltip("“G‚ÌoŒ»”ÍˆÍ Z")]
+    public Vector2 enemySpawnRangeZ = new Vector2(-5f, 5f);
+
+    [Tooltip("“G‚ÌoŒ»‚‚³ Y")]
+    public float enemySpawnHeight = 0f;
+
+    [Header("ƒXƒRƒAİ’è")]
+    [Tooltip("“G‚ğ“|‚µ‚½‚Æ‚«‚ÌŠl“¾ƒXƒRƒA")]
+    public int scorePerEnemy = 10;
+
+    // ƒQ[ƒ€ó‘Ô
+    public enum GameState
     {
-        if (currentState == GameState.WaitMoving)
-        {
-            CheckObjectsStopped();
-        }
+        Tutorial,      // à–¾‰æ–Ê
+        Countdown,     // ƒXƒ^[ƒgƒJƒEƒ“ƒgƒ_ƒEƒ“
+        Playing,       // ƒQ[ƒ€ƒvƒŒƒC’†
+        GameOver       // ƒQ[ƒ€I—¹
     }
-    public void StartPlayerMove()
+
+    private GameState currentState = GameState.Tutorial;
+    private float remainingTime;
+    private float countdownTimer;
+    private List<GameObject> activeEnemies = new List<GameObject>();
+    private Coroutine enemySpawnCoroutine;
+
+    public bool IsPlaying => currentState == GameState.Playing;
+    public float RemainingTime => remainingTime;
+    public float CountdownTimer => countdownTimer;
+    public GameState CurrentState => currentState;
+
+    void Awake()
     {
-        if (currentState == GameState.PlayerTurn) 
+        if (Instance == null)
         {
-            isObjectMoving = true;
-            currentState = GameState.WaitMoving;
-            StartCoroutine(WaitAndChangeTurn(GameState.EnemyTurn));
-        }
-    }
-    private void CheckObjectsStopped() 
-    {
-        bool playerStopped = playerRb.linearVelocity.magnitude < stopThreshold;
-        bool enemyStopped = enemyRb.linearVelocity.magnitude < stopThreshold;
-
-        if (playerStopped && enemyStopped && isObjectMoving) 
-        {
-            isObjectMoving = false;
-        }
-    }
-
-    private IEnumerator WaitAndChangeTurn(GameState nextState)
-    {
-        yield return new WaitForSeconds(0.1f);
-
-        while (playerRb.linearVelocity.magnitude > stopThreshold || enemyRb.linearVelocity.magnitude > stopThreshold)
-        {
-            yield return null;
-        }
-        currentState = nextState;
-
-        if (currentState == GameState.EnemyTurn)
-        {
-            Debug.Log("æ•µã®ã‚¿ãƒ¼ãƒ³é–‹å§‹");
-            EnemyMove();
+            Instance = this;
         }
         else
         {
-            Debug.Log("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚¿ãƒ¼ãƒ³é–‹å§‹");
+            Destroy(gameObject);
         }
     }
-    private void EnemyMove() 
+
+    void Start()
     {
-        Vector3 directionToPlayer = (playerRb.transform.position - enemyRb.transform.position).normalized;
-        float randomForce = Random.Range(0.5f, 1.0f);
-        float enemyForceMultiplier = 30f;
+        remainingTime = gameTime;
+        SetGameState(GameState.Tutorial);
+    }
 
-        enemyRb.AddForce(directionToPlayer * randomForce * enemyForceMultiplier, ForceMode.Impulse);
+    void Update()
+    {
+        switch (currentState)
+        {
+            case GameState.Countdown:
+                UpdateCountdown();
+                break;
+            case GameState.Playing:
+                UpdateGameTime();
+                break;
+        }
+    }
 
-        StartCoroutine(WaitAndChangeTurn(GameState.PlayerTurn));
+    void UpdateCountdown()
+    {
+        countdownTimer -= Time.deltaTime;
+
+        if (countdownTimer <= 0)
+        {
+            StartGame();
+        }
+    }
+
+    void UpdateGameTime()
+    {
+        remainingTime -= Time.deltaTime;
+
+        if (remainingTime <= 0)
+        {
+            remainingTime = 0;
+            EndGame(false);
+        }
+    }
+
+    public void OnStartButtonPressed()
+    {
+        if (currentState == GameState.Tutorial)
+        {
+            SetGameState(GameState.Countdown);
+            countdownTimer = startCountdownTime;
+        }
+    }
+
+    void StartGame()
+    {
+        SetGameState(GameState.Playing);
+        remainingTime = gameTime;
+        enemySpawnCoroutine = StartCoroutine(SpawnEnemiesRoutine());
+    }
+
+    public void EndGame(bool playerFell)
+    {
+        if (currentState != GameState.Playing) return;
+
+        SetGameState(GameState.GameOver);
+
+        if (enemySpawnCoroutine != null)
+        {
+            StopCoroutine(enemySpawnCoroutine);
+        }
+
+        if (DPUIManager.Instance != null)
+        {
+            if (playerFell)
+            {
+                DPUIManager.Instance.ShowGameOver("ƒvƒŒƒCƒ„[‚ª—‰º‚µ‚Ü‚µ‚½I");
+            }
+            else
+            {
+                DPUIManager.Instance.ShowGameOver("Time up");
+            }
+        }
+    }
+
+    void SetGameState(GameState newState)
+    {
+        currentState = newState;
+
+        if (DPUIManager.Instance != null)
+        {
+            DPUIManager.Instance.UpdateGameState(currentState);
+        }
+    }
+
+    IEnumerator SpawnEnemiesRoutine()
+    {
+        // ‰Šú‚Ì“G‚ğ¶¬
+        for (int i = 0; i < maxEnemies; i++)
+        {
+            SpawnEnemy();
+        }
+
+        while (currentState == GameState.Playing)
+        {
+            yield return new WaitForSeconds(enemyRespawnInterval);
+
+            // “G‚Ì”‚ªÅ‘å”‚æ‚è­‚È‚¢ê‡AV‚µ‚¢“G‚ğ¶¬
+            if (activeEnemies.Count < maxEnemies)
+            {
+                SpawnEnemy();
+            }
+        }
+    }
+
+    void SpawnEnemy()
+    {
+        if (enemyPrefab == null) return;
+
+        float randomX = Random.Range(enemySpawnRangeX.x, enemySpawnRangeX.y);
+        float randomZ = Random.Range(enemySpawnRangeZ.x, enemySpawnRangeZ.y);
+
+        Vector3 spawnPosition = new Vector3(randomX, enemySpawnHeight, randomZ);
+        GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+
+        activeEnemies.Add(enemy);
+    }
+
+    public void OnEnemyDestroyed(GameObject enemy)
+    {
+        if (activeEnemies.Contains(enemy))
+        {
+            activeEnemies.Remove(enemy);
+            DPScoreManager.Instance.AddScore(scorePerEnemy);
+        }
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public void MoveGameScene() {
+        var G = GameObject.Find("LogObject");
+        if (G != null) {
+            G.GetComponent<LogObject>().AddFrends(DPScoreManager.Instance.CurrentScore/10);
+        }
+        SceneManager.LoadScene("GameScene");
+    }
+    public List<GameObject> GetActiveEnemies()
+    {
+        return new List<GameObject>(activeEnemies);
+    }
+
+    public GameObject GetPlayer()
+    {
+        return GameObject.FindGameObjectWithTag("Player");
     }
 }
-             
 

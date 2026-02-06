@@ -6,7 +6,7 @@ public class DPDragShoot : MonoBehaviour
     private Rigidbody rb;
     private Vector3 dragStartPos;
     private float forceMultiplier = 3f;
-    [SerializeField] DPGameManager gameManager;
+    [SerializeField] DPGameManager DgameManager;
 
     void Start()
     {
@@ -30,7 +30,7 @@ public class DPDragShoot : MonoBehaviour
         // 力を加える
         // ForceMode.Impulse は瞬間的な力を加えるのに適しています
         rb.AddForce(forceDirection * forceMultiplier, ForceMode.Impulse);
-        gameManager.StartPlayerMove();
+        //DgameManager.StartPlayerMove();
     }
     // マウスのスクリーン座標をワールド座標に変換するヘルパー関数
     private Vector3 GetMouseWorldPosition()

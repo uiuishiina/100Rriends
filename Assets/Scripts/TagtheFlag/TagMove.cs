@@ -15,7 +15,7 @@ public class TagMove : MonoBehaviour
     [SerializeField, Header("キャラクターデータ")] protected Character_Data Data;
     //------  鬼側か逃げる側  ------
     public float Speed { private set; get; } = 5;
-    public float DSpeed { private set; get; } = 8;
+    public float DSpeed { private set; get; } = 6;
     public bool IsDemon { protected set; get; } = false;
 
     public bool IsStart = true;

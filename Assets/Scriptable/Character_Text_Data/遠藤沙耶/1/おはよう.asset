@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59062fcf4b348e24aa1c95a2f4c9ca82, type: 3}
+  m_Name: "\u304A\u306F\u3088\u3046"
+  m_EditorClassIdentifier: Assembly-CSharp::Setting_Text_Data
+  TextData: "\u304A\u306F\u3088\u3046\u53CB\u91CE\u541B\uFF01\u671D\u3054\u306F\u3093\u306F\u4F55\u3092\u98DF\u3079\u305F\uFF1F"
+  Side: 0
+  s: {fileID: 0}
+  IsLoad: 0
+  CHImageNum_: 2
+  SceneName: 
+  FUP_: 0
+  UpF_: 0

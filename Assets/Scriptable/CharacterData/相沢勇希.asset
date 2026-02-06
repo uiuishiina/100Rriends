@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Character_Data
   Name: "\u76F8\u6CA2\u52C7\u5E0C"
   Image:
-  - {fileID: 861843159, guid: d610a227bb944b741b10668216a70e6d, type: 3}
+  - {fileID: 1644784803, guid: dcf31d2f03741f2478fa32f2a25c966a, type: 3}
+  - {fileID: 714299501, guid: 85d1c558705fdb2459df482e5fa717b6, type: 3}
+  - {fileID: 1638781072, guid: 15e37aac6d0792742b4cb9ff62c11c2f, type: 3}
+  - {fileID: 357622003, guid: 6490ef52471aad840a0bf686bf8f370e, type: 3}
   LikeValue: 0
   Body: {fileID: 1079305653199592672, guid: b6c6eef4774716446b00663687c4f8af, type: 3}

@@ -60,7 +60,7 @@ public class ButtonAdd_ : MonoBehaviour
         }
         if(count >= 60)
         {
-
+            GameButtons[2].SetActive(true);
         }
     }
     public void Addbutton_OnClick()

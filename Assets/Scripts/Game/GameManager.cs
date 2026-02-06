@@ -90,6 +90,7 @@ public class GameManager : MonoBehaviour
         UpText_.enabled = true;
         UpText_.text = "+" + value.ToString();
         StartCoroutine(COuntTi());
+
     }
     IEnumerator COuntTi()
     {

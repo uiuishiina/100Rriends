@@ -15,3 +15,4 @@ MonoBehaviour:
   SceneTitle: 
   Datas:
   - {fileID: 11400000, guid: 53630b385e5541f4085cb49a4df6c726, type: 2}
+  UseImage_: 1

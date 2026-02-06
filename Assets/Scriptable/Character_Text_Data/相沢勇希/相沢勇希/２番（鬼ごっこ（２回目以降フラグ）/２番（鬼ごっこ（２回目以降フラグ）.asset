@@ -16,3 +16,4 @@ MonoBehaviour:
   Datas:
   - {fileID: 11400000, guid: 0a7ad382ccef8bf48989062c33aa6263, type: 2}
   - {fileID: 11400000, guid: c0dced41b53ea1040a763c47dcf8d556, type: 2}
+  UseImage_: 1

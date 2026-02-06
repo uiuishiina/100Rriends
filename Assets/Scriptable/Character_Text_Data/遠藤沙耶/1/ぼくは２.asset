@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2622d8bd98f1e948a76b00748ecff61, type: 3}
+  m_Name: "\u307C\u304F\u306F\uFF12"
+  m_EditorClassIdentifier: Assembly-CSharp::Switch
+  TextData: "\u50D5\u306F\u2026"
+  Side: 1
+  s: {fileID: 11400000}
+  IsLoad: 0
+  CHImageNum_: 0
+  SceneName: 
+  FUP_: 0
+  UpF_: 0
+  Switch_Data:
+  - Switched_Title: "\u3068\u3082\u3060\u3061\u304C\u5927\u597D\u304D\u3060\u3088\uFF01"
+    Switched_Data:
+    - {fileID: 11400000, guid: 54942b562e90e714c9004560e8dfd13f, type: 2}
+    - {fileID: 11400000, guid: 3d5907eed4fe51e4eb1a184f3c5a6500, type: 2}
+  - Switched_Title: "\u304A\u304B\u3057\u304C\u5927\u597D\u304D\u3060\u3088\uFF01"
+    Switched_Data:
+    - {fileID: 11400000, guid: d8c2a3fa72759ab4faa03f993478afaa, type: 2}
+    - {fileID: 11400000, guid: aa3fc398e852d3d46b7dfd049d37c635, type: 2}
