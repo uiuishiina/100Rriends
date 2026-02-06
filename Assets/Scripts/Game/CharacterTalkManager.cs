@@ -27,6 +27,7 @@ public class CharacterTalkManager : MonoBehaviour
     [SerializeField] MakeConversation_Text_Data Textdata;
     [SerializeField] Character_Data CharacterData;
     [SerializeField, Header("ƒvƒŒƒCƒ„[")] Character_Data Player_Data;
+    [SerializeField] ButtonAdd_ a;
     public enum TextMeshProMode { TextMeshPro, TextMeshProUGUI, TMP_Text }
 
     private IEnumerator colti;
@@ -60,6 +61,7 @@ public class CharacterTalkManager : MonoBehaviour
         Textdata = d;
         CharacterData = c;
         gameManager.c(false);
+        a.ADDC(false);
         Talk();
     }
     void Talk()
@@ -69,41 +71,57 @@ public class CharacterTalkManager : MonoBehaviour
     public void CTalk(MakeConversation_Text_Data data) { 
         StopAllCoroutines();
         colti = null;
-        StartCoroutine(CCOL(data.Datas));
+        gameManager.c(false);
+        StartCoroutine(CCOL(data.Datas,data.UseImage_));
     }
-    IEnumerator CCOL(Setting_Text_Data[] data)
+    IEnumerator CCOL(Setting_Text_Data[] data,bool i)
     {
-        colti = col(data, CharacterData);
+        TalkUI.SetActive(true);
+        colti = col(data, CharacterData,i);
         yield return StartCoroutine(colti);
     }
     IEnumerator Manage(){
         TalkUI.SetActive(true);
         if (Player_Data.Image != null) { PlayerImage.sprite = Player_Data.Image[0]; }
         if (CharacterData.Image != null) { FriendsImage.sprite = CharacterData.Image[0]; }
-        colti = col(Textdata.Datas, CharacterData);
+        colti = col(Textdata.Datas, CharacterData, Textdata.UseImage_);
         yield return StartCoroutine(colti);
         TalkUI.SetActive(false);
         gameManager.c(true);
+        a.ADDC(true);
         yield break;
     }
 
-    IEnumerator col(Setting_Text_Data[] data,Character_Data charaData)
+    IEnumerator col(Setting_Text_Data[] data,Character_Data charaData,bool usei)
     {
         foreach (var item in data)
         {
-            PlayerImage.color = new Color(0.5f, 0.5f, 0.5f, 1);
-            FriendsImage.color = new Color(0.5f, 0.5f, 0.5f, 1);
-            if (item.Side)  {
-                PlayerImage.sprite = Player_Data.Image[item.CHImageNum_];
-                Nametext.text = Player_Data.Name;
-                PlayerImage.color = new Color(1, 1, 1, 1);
+            if (usei)
+            {
+                PlayerImage.enabled = true;
+                FriendsImage.enabled = true;
+                PlayerImage.color = new Color(0.5f, 0.5f, 0.5f, 1);
+                FriendsImage.color = new Color(0.5f, 0.5f, 0.5f, 1);
+                if (item.Side)
+                {
+                    PlayerImage.sprite = Player_Data.Image[item.CHImageNum_];
+                    Nametext.text = Player_Data.Name;
+                    PlayerImage.color = new Color(1, 1, 1, 1);
+                }
+                else
+                {
+                    FriendsImage.sprite = charaData.Image[item.CHImageNum_];
+                    Nametext.text = charaData.Name;
+                    FriendsImage.color = new Color(1, 1, 1, 1);
+                }
             }
-            else  {
-                FriendsImage.sprite = charaData.Image[item.CHImageNum_];
-                Nametext.text = charaData.Name;
-                FriendsImage.color = new Color(1, 1, 1, 1);
+            else
+            {
+                PlayerImage.enabled = false;
+                FriendsImage.enabled = false;
             }
-                yield return StartCoroutine(conttext.TextActive(Talktext, item.TextData));
+                Debug.Log("cclo");
+            yield return StartCoroutine(conttext.TextActive(Talktext, item.TextData));
             if (item.s != null) {
                 left.text = item.s.Switch_Data[0].Switched_Title;
                 right.text = item.s.Switch_Data[1].Switched_Title;
@@ -112,7 +130,7 @@ public class CharacterTalkManager : MonoBehaviour
                 yield return new WaitUntil(() => PushBool);
                 PushBool = false;
                 CButton(false);
-                yield return StartCoroutine(col(item.s.Switch_Data[num].Switched_Data,charaData));
+                yield return StartCoroutine(col(item.s.Switch_Data[num].Switched_Data,charaData,usei));
             }
             else
             {
@@ -124,6 +142,7 @@ public class CharacterTalkManager : MonoBehaviour
             {
                 SceneManager.LoadScene(item.SceneName);
             }
+            if (item.UpF_) { GameObject.Find("LogObject").GetComponent<LogObject>().AddFrends(item.FUP_); }
         }
         yield break;
     }

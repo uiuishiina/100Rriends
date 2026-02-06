@@ -9,4 +9,6 @@ public class Setting_Text_Data : ScriptableObject
     public bool IsLoad = false;
     public int CHImageNum_ = 0;
     [SerializeField, Header("ƒV[ƒ“‚Ì–¼‘O")] public string SceneName = null;
+    public int FUP_ = 0;
+    public bool UpF_ = false;
 }

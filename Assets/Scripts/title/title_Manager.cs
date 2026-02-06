@@ -1,6 +1,9 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
+using Button = UnityEngine.UI.Button;
 
 
 public class title_Manager : MonoBehaviour
@@ -12,10 +15,14 @@ public class title_Manager : MonoBehaviour
     [SerializeField] GameObject Panel;
     [SerializeField,Header("音量スライダー")] Slider ValueSlider;
     [SerializeField, Header("オンロード")] DontDestroy Dont;
+    public GameObject panel;
+    public Button PButton;
     //------  ------
     private void Start()
     {
         Panel.SetActive(false);
+        panel.SetActive(false);
+        StartButton.enabled = false;
         StartButton.onClick.AddListener(() => {
             SceneManager.LoadScene("GameScene");
         });
@@ -37,5 +44,20 @@ public class title_Manager : MonoBehaviour
         //ValueSlider.onValueChanged.AddListener((float value) => { 
         //    Dont.data_.ChengeVolume(value);
         //});
+
+        PButton.onClick.AddListener(() => { StartCoroutine(INVPanel()); });
+    }
+
+    IEnumerator INVPanel()
+    {
+        panel.SetActive(true);
+        panel.GetComponent<Image>().color = new Color(1, 1, 1, 0);
+        for(int i = 0; i < 10; i++)
+        {
+            panel.GetComponent<Image>().color += new Color(0, 0, 0, 0.1f);
+            yield return new WaitForSeconds(0.1f);
+        }
+        StartButton.enabled = true;
+        yield break;
     }
 }

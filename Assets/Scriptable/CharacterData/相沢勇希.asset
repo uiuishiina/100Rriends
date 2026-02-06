@@ -16,4 +16,4 @@ MonoBehaviour:
   Image:
   - {fileID: 861843159, guid: d610a227bb944b741b10668216a70e6d, type: 3}
   LikeValue: 0
-  Body: {fileID: 1079305653199592672, guid: 3b4e378644f22f948b4dc8cec570947a, type: 3}
+  Body: {fileID: 1079305653199592672, guid: b6c6eef4774716446b00663687c4f8af, type: 3}

@@ -7,4 +7,10 @@ public class SceneButtonScript : MonoBehaviour
     {
         SceneManager.LoadScene(name);
     }
+
+    private void Start()
+    {
+        var l = GameObject.Find("LogObject");
+        if(l != null) { l.GetComponent<LogObject>().Result(); }
+    }
 }

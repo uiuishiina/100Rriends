@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Frends
   - SceneManager
+  - Enemy
+  - Chair
   layers:
   - Default
   - TransparentFX

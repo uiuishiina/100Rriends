@@ -30,6 +30,7 @@ public class AudioManager : MonoBehaviour
     {
         BGMSource.Stop();
         SESource.Stop();
+        if (scene.name == "ChairScene") { return; }
         var g = GameObject.Find("SceneManager");
         if (g == null) { Debug.Log("Not Found SceneManager"); return; }
         AudioClip UseSE = null;

@@ -33,7 +33,9 @@ public class NaviMove : TagMove
     }
     private void Update()
     {
-        Image.transform.LookAt(Camera.main.transform);
+        var cpos = Camera.main.transform.position;
+        var c = new Vector3(0, cpos.y, -1);
+        Image.transform.rotation = UnityEngine.Quaternion.LookRotation(c);
         if (IsStart){ return;}
         if (IsStop) { return; } 
         if (Target == null){
@@ -71,6 +73,8 @@ public class NaviMove : TagMove
             }
             else FindPoints(false);
         }
+
+        if (!Target) { return; }
         if (IsDemon) { Agent.speed = DSpeed; }
         else { Agent.speed = Speed; }
         Agent.SetDestination(Target.transform.position);
