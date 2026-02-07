@@ -68,14 +68,14 @@ public class AudioManager : MonoBehaviour
     }
     void SetSliderValue()
     {
-        BGMSlider.value = BGMData_.SetVolume;
-        SESlider.value = SEData_.SetVolume;
+        BGMSlider.value = BGMData_.SetVolume*10;
+        SESlider.value = SEData_.SetVolume*10;
     }
 
     void ChangeVolume(float volume, AudioSource Source, Audio_Data data)
     {
-        Source.volume = volume;
-        data.SetVolume = volume;
+        Source.volume = volume/10;
+        data.SetVolume = volume/10;
     }
     private void OnSESliderReleased()
     {

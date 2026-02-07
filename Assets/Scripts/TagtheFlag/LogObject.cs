@@ -9,7 +9,7 @@ public class LogObject : MonoBehaviour
 {
     public static GameObject Instance_;
     [SerializeField]public float Time_ = 0;
-    public int FriendsCount_ { get; set; } = 60;
+    public int FriendsCount_ { get; set; } = 0;
     private int savec = 0;
 
     public List<(string,int)> FrendsNames_ = new List<(string, int)>();
