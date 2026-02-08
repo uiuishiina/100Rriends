@@ -1089,17 +1089,6 @@
                     "action": "Space",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "113b7543-6159-4e46-bceb-bdc8b6d7a1df",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ESC",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         },

@@ -15,4 +15,6 @@ MonoBehaviour:
   Title: {fileID: 8300000, guid: 319e1aa879866ac45bf4a7d9bbd063f3, type: 3}
   Talk: {fileID: 8300000, guid: 319e1aa879866ac45bf4a7d9bbd063f3, type: 3}
   TagtheFlag: {fileID: 8300000, guid: 319e1aa879866ac45bf4a7d9bbd063f3, type: 3}
+  ResultFlag: {fileID: 8300000, guid: 319e1aa879866ac45bf4a7d9bbd063f3, type: 3}
+  kesibato: {fileID: 8300000, guid: 319e1aa879866ac45bf4a7d9bbd063f3, type: 3}
   SetVolume: 0.023983112

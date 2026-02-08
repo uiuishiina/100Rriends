@@ -16,12 +16,11 @@ namespace Kouya
             randomPlayTIme = Random.Range(5f, 30f);
 
         }
-
-        // Update is called once per frame
-        void Update()
+        public void SetBGMVolume(float value)
         {
-
+            audiosource.volume = value;
         }
+
         public void AudioPlay()
         {
             Debug.Log("AudioPlayÇ™ì«Ç›çûÇ‹ÇÍÇ‹ÇµÇΩ");

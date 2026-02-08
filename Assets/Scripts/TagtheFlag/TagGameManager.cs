@@ -103,7 +103,7 @@ public class TagGameManager : MonoBehaviour
         }
         var G = GameObject.Find("LogObject");
         if (G != null) {
-            G.GetComponent<LogObject>().AddFrends(Players.Length - 1);//Players.Length - 1
+            G.GetComponent<LogObject>().AddFrends((Players.Length - 1)*2);//Players.Length - 1
         }
         SceneManager.LoadScene("GameScene");
     }

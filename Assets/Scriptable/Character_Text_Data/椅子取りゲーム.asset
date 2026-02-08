@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MakeConversation_Text_Data
   SceneTitle: 
   Datas:
-  - {fileID: 11400000, guid: dffbcd079e681e84bb680fba9a0733e7, type: 2}
+  - {fileID: 11400000, guid: 07a1c4bc46e29d94cb36b8e84613b075, type: 2}
   UseImage_: 0

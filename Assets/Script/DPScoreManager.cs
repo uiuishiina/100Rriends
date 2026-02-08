@@ -6,7 +6,7 @@ public class DPScoreManager : MonoBehaviour
 {
     public static DPScoreManager Instance;
 
-    private int currentScore = 0;
+    private int currentScore = 10;
 
     public int CurrentScore => currentScore;
 

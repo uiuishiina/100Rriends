@@ -88,7 +88,6 @@ public class CharacterTalkManager : MonoBehaviour
         yield return StartCoroutine(colti);
         TalkUI.SetActive(false);
         gameManager.c(true);
-        a.ADDC(true);
         yield break;
     }
 

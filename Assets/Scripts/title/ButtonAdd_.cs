@@ -9,7 +9,7 @@ public class ButtonAdd_ : MonoBehaviour
     [SerializeField] private GameObject pale;
     [SerializeField] private LogObject Log;
     public GameObject[] GameButtons;
-    
+    private bool isp = false;
 
     void Start()
     {
@@ -17,7 +17,11 @@ public class ButtonAdd_ : MonoBehaviour
         if(GameObject.Find("LogObject").GetComponent<LogObject>() != null)
         {
             Log = GameObject.Find("LogObject").GetComponent<LogObject>();
-            Addbutton_.SetActive(true);
+            Addbutton_.SetActive(false);
+            foreach(var button in GameButtons)
+            {
+                button.SetActive(false);
+            }
             //if (log.Scenename_.Count != 0){
             //    Addbutton_.SetActive(true);
 
@@ -41,8 +45,9 @@ public class ButtonAdd_ : MonoBehaviour
             
             ActiveButton(Log.FriendsCount_);
         }
-        
-    }
+       
+
+        }
     public void ADDC(bool a)
     {
         Addbutton_.SetActive(a);
@@ -51,7 +56,7 @@ public class ButtonAdd_ : MonoBehaviour
     {
         if (count >= 5)
         {
-            
+            Addbutton_.SetActive(true);
             GameButtons[0].SetActive(true);
         }
         if (count >= 35)
@@ -65,8 +70,9 @@ public class ButtonAdd_ : MonoBehaviour
     }
     public void Addbutton_OnClick()
     {
-        Addbutton_.SetActive(false);
-        pale.SetActive(true);
+        isp = !isp;
+        pale.SetActive(isp);
+
     }
 
     public void GameButton(MakeConversation_Text_Data data)

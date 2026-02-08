@@ -180,7 +180,7 @@ namespace Kouya
         {
             Panel.SetActive(true);
             Debug.Log("StartGame‚ª“Ç‚Ýž‚Ü‚ê‚Ü‚µ‚½");
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(1f);
             Debug.Log("ƒ‹[ƒv’†");
 
             while (limitTime > 0)

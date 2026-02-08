@@ -27,6 +27,13 @@ public class LogObject : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         game = false;
+        if(scene.name == "TitleScene") {
+            FriendsCount_ = 60;
+            Time_ = 0;
+            savec = 0;
+            FrendsNames_.Clear();
+            Scenename_.Clear();
+        }
         if (scene.name == "ResultScene") {
             
         }

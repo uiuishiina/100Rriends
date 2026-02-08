@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     private bool S;
     private void Start()
     {
+        Time.timeScale = 1f;
         var f = true;
         player.enabled = f;
         Ui.enabled = !f;

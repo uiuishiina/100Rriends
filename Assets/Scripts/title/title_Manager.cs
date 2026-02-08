@@ -53,9 +53,9 @@ public class title_Manager : MonoBehaviour
         panel.SetActive(true);
         panel.GetComponent<Image>().color = new Color(1, 1, 1, 0);
         for(int i = 0; i < 10; i++)
-        {
+        {Debug.Log("Á‚¦‚½‚æ");
             panel.GetComponent<Image>().color += new Color(0, 0, 0, 0.1f);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForEndOfFrame();
         }
         StartButton.enabled = true;
         yield break;
