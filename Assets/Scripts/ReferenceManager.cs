@@ -8,6 +8,7 @@ public class ReferenceManager : MonoBehaviour
     [SerializeField] public Slider SESlider;
     [SerializeField] public AudioSource BGMSource;
     [SerializeField] public AudioSource SESource;
+    [SerializeField] public AudioClip SEClip;
 
     public AudioSource GetBGMSource()
     {

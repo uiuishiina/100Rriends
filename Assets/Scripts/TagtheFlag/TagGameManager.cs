@@ -21,6 +21,8 @@ public class TagGameManager : MonoBehaviour
     [SerializeField, Header("タイマー")] TextMeshProUGUI TimeText_;
     [SerializeField, Header("カウントダウン")] TextMeshProUGUI CountText_;
     [SerializeField, Header("カウントダウン")] TextMeshProUGUI TachiText_;
+    public TextMeshProUGUI T;
+    private LogObject log;
 
     private void Start()
     {
@@ -28,7 +30,11 @@ public class TagGameManager : MonoBehaviour
         ChengeDamon(Players[0],false);
         StartCoroutine(StartCall(4));
         TachiText_.enabled = false;
-        Time_ = Players.Length;
+        Time_ = Players.Length-1;
+        var G = GameObject.Find("LogObject");
+        if (G != null) {
+            log = G.GetComponent<LogObject>();
+        }
     }
     public void ChengeDamon(GameObject gameObject,bool a = true)
     {
@@ -77,6 +83,9 @@ public class TagGameManager : MonoBehaviour
     }
     private void Update()
     {
+        var min = ((int)log.Time_ % 3600) / 60;
+        var sec = (int)log.Time_ % 60;
+        T.text = min.ToString("D2") + ":" + sec.ToString("D2");
         if (!IsStart){
             return;
         }
@@ -98,12 +107,17 @@ public class TagGameManager : MonoBehaviour
     {
         CountText_.enabled = true;
         CountText_.text = text;
+        var g = GameObject.Find("AudioManager");
+        if (g != null)
+        {
+            g.GetComponent<AudioManager>().PLAYSE();
+            g.GetComponent<AudioManager>().stopbgm();
+        }
         for (int i = 0; i < 3; i++) {
             yield return new WaitForSeconds(1);
         }
-        var G = GameObject.Find("LogObject");
-        if (G != null) {
-            G.GetComponent<LogObject>().AddFrends((Players.Length - 1)*2);//Players.Length - 1
+        if (log != null) {
+            log.AddFrends((Players.Length - 1)*2);//Players.Length - 1
         }
         SceneManager.LoadScene("GameScene");
     }

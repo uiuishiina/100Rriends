@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using Unity.VisualScripting;
+using UnityEngineInternal;
 
 namespace Kouya
 {
@@ -10,6 +11,7 @@ namespace Kouya
         Kouya.Chairsgame_base chairsgame_Base;
         public AudioSource audiosource;
         private float randomPlayTIme;
+        public AudioClip SEClips;
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
@@ -31,6 +33,11 @@ namespace Kouya
         {
             Debug.Log("AudioStopÇ™ì«Ç›çûÇ‹ÇÍÇ‹ÇµÇΩ");
             audiosource.Stop();
+        }
+        public void SEClip()
+        {
+            audiosource.Stop();
+            audiosource.PlayOneShot(SEClips);
         }
     }
 }

@@ -41,19 +41,23 @@ public class ButtonAdd_ : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (Log != null) {
+        if (Log != null)
+        {
+            if (!isp)
+            {
+                ActiveButton();
+            }
             
-            ActiveButton(Log.FriendsCount_);
         }
-       
-
-        }
+    }
     public void ADDC(bool a)
     {
         Addbutton_.SetActive(a);
+        isp = false;
     }
-    void ActiveButton(int count)
+    public void ActiveButton()
     {
+        var count = Log.FriendsCount_;
         if (count >= 5)
         {
             Addbutton_.SetActive(true);
@@ -72,7 +76,6 @@ public class ButtonAdd_ : MonoBehaviour
     {
         isp = !isp;
         pale.SetActive(isp);
-
     }
 
     public void GameButton(MakeConversation_Text_Data data)

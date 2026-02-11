@@ -206,6 +206,12 @@ public class DPGameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     public void MoveGameScene() {
+        var g = GameObject.Find("AudioManager");
+        if (g != null)
+        {
+            g.GetComponent<AudioManager>().PLAYSE();
+            g.GetComponent<AudioManager>().stopbgm();
+        }
         var G = GameObject.Find("LogObject");
         if (G != null) {
             G.GetComponent<LogObject>().AddFrends(DPScoreManager.Instance.CurrentScore/10);

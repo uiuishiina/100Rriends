@@ -28,6 +28,8 @@ public class DPUIManager : MonoBehaviour
     public Button restartButton;
     public Button MoveScene;
 
+    public TextMeshProUGUI Ti;
+    private LogObject Log;
     void Awake()
     {
         if (Instance == null)
@@ -42,6 +44,7 @@ public class DPUIManager : MonoBehaviour
 
     void Start()
     {
+        Log = GameObject.Find("LogObject").GetComponent<LogObject>();
         // ボタンのイベント設定
         if (startButton != null)
         {
@@ -75,7 +78,9 @@ public class DPUIManager : MonoBehaviour
             else if (DPGameManager.Instance.CurrentState == DPGameManager.GameState.Playing)
             {
                 UpdateTimer(DPGameManager.Instance.RemainingTime);
-
+                var min = ((int)Log.Time_ % 3600) / 60;
+                var sec = (int)Log.Time_ % 60;
+                Ti.text = min.ToString("D2") + ":" + sec.ToString("D2");
                 // カウントダウンテキストを非表示
                 if (countdownText != null)
                 {
@@ -163,7 +168,7 @@ public class DPUIManager : MonoBehaviour
         if (timerText != null)
         {
             int seconds = Mathf.CeilToInt(timeRemaining);
-            timerText.text = $"Timer: {seconds}";
+            timerText.text = $"残り時間: {seconds}";
 
             // 残り時間が少ない場合は色を変更
             if (seconds <= 10)

@@ -88,6 +88,8 @@ public class CharacterTalkManager : MonoBehaviour
         yield return StartCoroutine(colti);
         TalkUI.SetActive(false);
         gameManager.c(true);
+        Debug.Log("cclo");
+        a.ActiveButton();
         yield break;
     }
 
@@ -119,7 +121,7 @@ public class CharacterTalkManager : MonoBehaviour
                 PlayerImage.enabled = false;
                 FriendsImage.enabled = false;
             }
-                Debug.Log("cclo");
+                
             yield return StartCoroutine(conttext.TextActive(Talktext, item.TextData));
             if (item.s != null) {
                 left.text = item.s.Switch_Data[0].Switched_Title;

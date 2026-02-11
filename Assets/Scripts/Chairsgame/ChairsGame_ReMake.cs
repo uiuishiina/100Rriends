@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 namespace Kouya
 {
@@ -65,6 +66,11 @@ namespace Kouya
         GameObject[] enemys;
         GameObject players;
        public GameObject Eximage;
+        public TextMeshProUGUI RaundText_;
+        int Raund_ = 0;
+        int RaundCount_ = 0;
+        public TextMeshProUGUI TimeText;
+        private LogObject log;
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         private void Awake()
         {
@@ -79,12 +85,16 @@ namespace Kouya
             WaitPanel.SetActive(false);
             ResultPanel.SetActive(false);
             StartCoroutine(GameMaster());
+            log = GameObject.Find("LogObject").GetComponent<LogObject>();
         }
 
         // Update is called once per frame
         void Update()
         {
-           //---------------椅子の数を確認----------------------------
+            var min = ((int)log.Time_ % 3600) / 60;
+            var sec = (int)log.Time_ % 60;
+            TimeText.text = min.ToString("D2") + ":" + sec.ToString("D2");
+            //---------------椅子の数を確認----------------------------
             GameObject[] Chairs = GameObject.FindGameObjectsWithTag("Chair");
             foreach(var c in Chairs)
             {
@@ -106,8 +116,11 @@ namespace Kouya
         {
             Debug.Log("GameMasterが読み込まれました");
             yield return StartCoroutine(ExpGame());
+            Raund_ = CreateCount / 2;
             while (CreateCount > 1)
             {
+                RaundCount_++;
+                RaundText_.text = RaundCount_.ToString() + "/" + Raund_.ToString() + "Round ";
                 check = false;  
                 Debug.Log("ゲームループ開始");
                 yield return StartCoroutine(CreateChair());
@@ -120,7 +133,7 @@ namespace Kouya
                 CreateCharaCount -= 2;
             }
             Debug.Log("ゲームループ終了");
-            yield return new WaitUntil(() => end);
+            //yield return new WaitUntil(() => end);
             yield return StartCoroutine(EndedGame());
             yield break;
         }
@@ -164,13 +177,14 @@ namespace Kouya
             Debug.Log("EndedGameが読み込まれました");
             ResultPanel.SetActive(true);
             ResultText.text = "Finish!!";
-            yield return new WaitForSeconds(2f);
-            ResultText.text = "";
+            //yield return new WaitForSeconds(2f);
+            //ResultText.text = "";
+            GameObject.Find("Audio Source").GetComponent<Chairgame_Music>().SEClip();
             yield return new WaitForSeconds(3f);
             var G = GameObject.Find("LogObject");
             if (G != null)
             {
-                G.GetComponent<LogObject>().AddFrends(40);
+                G.GetComponent<LogObject>().AddFrends(9);
             }
             SceneManager.LoadScene("GameScene");
             yield break;
@@ -270,7 +284,7 @@ namespace Kouya
             Debug.Log("CreateChairが読み込まれました");
             Debug.Log("椅子の数:" + CreateCount);
             var oneCycle = 2.0f * Mathf.PI;
-            if (CreateCount >= 1)
+            if (CreateCount > 1)
             {
                 for (var i = 0; i < CreateCount; i++)
                 {

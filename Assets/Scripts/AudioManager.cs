@@ -87,16 +87,20 @@ public class AudioManager : MonoBehaviour
     private void OnSESliderReleased()
     {
         // スライダーを離したときにテストSEだけを鳴らす
-        if (manager_.BGMSource != null && manager_.BGMSource.clip != null) {
-            manager_.BGMSource.PlayOneShot(manager_.BGMSource.clip);
+        if (manager_.SESource != null && manager_.SESource.clip != null) {
+            manager_.SESource.PlayOneShot(manager_.SESource.clip);
         }
         else {
             Debug.LogWarning("TestSE AudioSource または clip が設定されていません。");
         }
     }
+    public void stopbgm()
+    {
+        manager_.BGMSource.Stop();
+    }
 
     public void PLAYSE()
     {
-        manager_.BGMSource.PlayOneShot(manager_.BGMSource.clip);
+        manager_.SESource.PlayOneShot(manager_.SEClip);
     }
 }

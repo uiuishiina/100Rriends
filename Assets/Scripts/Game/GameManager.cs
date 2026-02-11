@@ -19,7 +19,8 @@ public class GameManager : MonoBehaviour
     [SerializeField, Header("タイマー")] TextMeshProUGUI TimeText_;
     [SerializeField] TextMeshProUGUI CountText_;
     [SerializeField] TextMeshProUGUI UpText_;
-    LogObject Log;    
+    LogObject Log;
+    public ButtonAdd_ ButtonAdd_;
     bool end = false;
     private bool isPause = false;
     private bool S;
@@ -47,8 +48,18 @@ public class GameManager : MonoBehaviour
 
     public void c(bool a)
     {
-        player.enabled = a;
-        Ui.enabled = !a;
+        if (a)
+        {
+            Ui.enabled = !a;
+            player.enabled = a;
+        }
+        else
+        {
+            player.enabled = a;
+            Ui.enabled = !a;
+        }
+
+
     }
 
     private void P(bool pause)
@@ -60,9 +71,17 @@ public class GameManager : MonoBehaviour
             Panel.enabled = true;
         }
         else {
-            player.enabled = S;
-            Ui.enabled = !S;
             Panel.enabled = false;
+
+            if (S)
+            {
+                player.enabled = true;
+            }
+            else
+            {
+                Ui.enabled = true;
+            }
+
         }
     }
     public void OnESC(InputValue inputValue)
@@ -81,6 +100,7 @@ public class GameManager : MonoBehaviour
         pausePanel.SetActive(isPause);
         SettingPanel.SetActive(false);
         Time.timeScale = isPause ? 0f : 1f;
+        ButtonAdd_.ADDC(false);
     }
     void End()
     {

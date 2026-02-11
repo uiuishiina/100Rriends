@@ -28,7 +28,7 @@ public class LogObject : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         game = false;
         if(scene.name == "TitleScene") {
-            FriendsCount_ = 60;
+            FriendsCount_ = 0;
             Time_ = 0;
             savec = 0;
             FrendsNames_.Clear();
@@ -38,7 +38,8 @@ public class LogObject : MonoBehaviour
             
         }
         else if ((FriendsCount_+ savec) >= 100) {
-            SceneManager.LoadScene("ResultScene");
+            //IsStop = true;
+            //GameObject.Find("ResultAnimator").GetComponent<ResultAnimator>().StartAnimator();
         }
         if(scene.name == "GameScene") { game = true; AddFrends(0); return; }
         if(Scenename_.Contains(scene.name)) { return; }
@@ -46,13 +47,20 @@ public class LogObject : MonoBehaviour
     }
     private void Update()
     {
+        if (IsStop) { return; }
         Time_ += Time.deltaTime;
+        if (FriendsCount_ >= 100)
+        {
+            IsStop = true;
+            GameObject.Find("ResultAnimator").GetComponent<ResultAnimator>().StartAnimator();
+        }
     }
     public void AddFrends(int count)
     {
         savec += count;
         if (game)
         {
+            Debug.Log("Game");
             FriendsCount_ += savec;
             GameObject.Find("GameManager").GetComponent<GameManager>().UpCount(savec);
             savec = 0;
